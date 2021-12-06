@@ -12,7 +12,6 @@ import {
 import { ElTable } from "element-plus";
 import { Column } from "./index.d";
 import { defaultTableProps } from "./config";
-import { isArray } from "../../../utils/validate";
 
 const emits = [
   "select",

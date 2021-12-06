@@ -13,7 +13,7 @@ import { ElForm } from "element-plus";
 // import { Callback } from "element-plus/lib/components/form/src/form.vue";
 import { Column } from "./index.d";
 import { defaultTableProps } from "./config";
-import DpSelect from "@/packages/select/src/index.vue";
+import DpSelect from "../../select/src/index.vue";
 
 export enum Mode {
   "edit" = "edit",

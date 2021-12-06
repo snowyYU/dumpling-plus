@@ -27,9 +27,9 @@ module.exports = {
           "*": resolve(""),
           "~": resolve("packages"),
         },
-        fallback: {
-          path: require.resolve("path-browserify"),
-        },
+        // fallback: {
+        //   path: require.resolve("path-browserify"),
+        // },
       },
       module: {
         rules: [

@@ -2,13 +2,12 @@
 import {
   defineComponent,
   h,
-  RawProps,
   RawSlots,
   // resolveComponent,
   // Slot,
 } from "vue";
-import DpTable from "@/packages/table/src/index.vue";
-import DpPagination from "@/packages/pagination/src/index.vue";
+import DpTable from "../../table/src/index.vue";
+import DpPagination from "../../pagination/src/index.vue";
 import { camelCaseToKebabCase } from "@/utils/index";
 
 const paginationPropNames = [

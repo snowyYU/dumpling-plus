@@ -1,20 +1,47 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
-
+import Layout from "@/layout/index.vue";
 const routes: Array<RouteRecordRaw> = [
+  // {
+  //   path: "/",
+  //   name: "Home",
+  //   component: Home,
+  //   redirect: "/complex/searchForm",
+  // },
   {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/complex",
+    component: Layout,
+    redirect: "noredirect",
+    meta: {
+      title: "复杂组件",
+      // icon: '#icon404'
+    },
+    children: [
+      {
+        path: "/complex/searchForm",
+        component: () =>
+          import(
+            /* webpackChunkName: "complex-search-form" */ "@/views/complex/search-form/index.vue"
+          ),
+        name: "searchForm",
+        meta: {
+          title: "搜索表单",
+          noCache: true,
+        },
+      },
+      {
+        path: "/complex/baseTable",
+        component: () =>
+          import(
+            /* webpackChunkName: "complex-base-table" */ "@/views/complex/base-table/index.vue"
+          ),
+        name: "baseTable",
+        meta: {
+          title: "基础配置表格",
+          noCache: true,
+        },
+      },
+    ],
   },
 ];
 

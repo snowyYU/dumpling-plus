@@ -10,9 +10,9 @@ import {
 import { ElForm } from "element-plus";
 // import { Callback } from "element-plus/lib/components/form/src/form.vue";
 import { ValidateFieldCallback } from "element-plus/lib/tokens";
-import DpSelect from "@/packages/select/src/index.vue";
-import DpRadioGroup from "@/packages/radio-group/src/index.vue";
-import DpCheckboxGroup from "@/packages/checkbox-group/src/index.vue";
+import DpSelect from "../../select/src/index.vue";
+import DpRadioGroup from "../../radio-group/src/index.vue";
+import DpCheckboxGroup from "../../checkbox-group/src/index.vue";
 import {
   defaultLayoutConfig,
   defaultFormProps,
@@ -500,9 +500,13 @@ export default defineComponent({
                   },
                   {
                     default: () => {
-                      return h(resolveComponent("el-row"), null, {
-                        default: getChildren,
-                      });
+                      return h(
+                        resolveComponent("el-row"),
+                        {},
+                        {
+                          default: getChildren,
+                        }
+                      );
                     },
                   }
                 ),

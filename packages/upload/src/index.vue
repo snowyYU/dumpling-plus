@@ -335,7 +335,6 @@ export default defineComponent({
       line-height: normal;
       background: #f4f7fb;
       border-radius: 4px;
-      round: #f4f7fb;
       .file-name {
         display: inline-block;
         padding-right: 21px;
