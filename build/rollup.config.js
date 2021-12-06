@@ -3,6 +3,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import path from "path";
 // import commonjs from '@rollup/plugin-commonjs'
 import { terser } from "rollup-plugin-terser";
+import scss from "rollup-plugin-scss";
 import typescript from "rollup-plugin-typescript2";
 import pkg from "../package.json";
 const deps = Object.keys(pkg.dependencies);
@@ -21,6 +22,7 @@ export default [
     plugins: [
       terser(),
       nodeResolve(),
+      scss(),
       // commonjs(),
       vue({
         target: "browser",
