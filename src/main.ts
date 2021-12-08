@@ -6,7 +6,9 @@ import { store } from "./store";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
-import Dumpling from "~/index";
+import Dumpling from "dumpling-plus";
+import "normalize.css";
+
 import "@/styles/index.scss";
 
 createApp(App)
@@ -15,5 +17,5 @@ createApp(App)
   .use(ElementPlus, {
     locale: zhCn,
   })
-  .use(Dumpling)
+  .use(Dumpling, { downloadResponseById: "downloadResponseById" })
   .mount("#app");
