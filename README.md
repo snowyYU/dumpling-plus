@@ -1,5 +1,29 @@
 # dumpling-plus
 
+## usage
+
+```
+npm i dumpling-plus -S
+```
+
+```javascript
+import DumplingPlus from "dumpling-plus";
+import { downloadResponseById, uploadFile } from "@/apis/common";
+app.use(DumplingPlus, { downloadResponseById, uploadFile });
+```
+
+## development
+
+clone this project and `npm run serve`,it will start a demo project
+
+## build
+
+> initial version only has umd version bundle,others will come soon
+
+```
+npm run build:esm
+```
+
 ## directory explain
 
 ```
@@ -21,7 +45,7 @@
 
 ```
 
-## 执行脚本解析
+## scripts explain (build:lib && build had been deprecated)
 
 ```
 "scripts": {
@@ -37,6 +61,6 @@
 - --dest : 输出目录，默认 dist。改成 lib
 - [entry]: 入口文件路径，默认为 src/App.vue。这里我们指定编译 packages/ 组件库目录。
 
-### Customize configuration
+## reference
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [zhihu](https://zhuanlan.zhihu.com/p/423793783)
