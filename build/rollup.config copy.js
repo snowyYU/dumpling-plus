@@ -17,31 +17,26 @@ export default [
     input: path.resolve(__dirname, "../packages/index.ts"),
     output: [
       {
-        name: "DumplingPlus",
-        format: "umd",
+        // name: "index.umd.js",
+        format: "esm",
         // format: "umd",
-        file: pkg.main,
-        globals: {
-          vue: "Vue",
-          lodash: "lodash",
-        },
+        file: pkg.module,
       },
     ],
     plugins: [
-      // terser(),
+      terser(),
       nodeResolve(),
       // commonjs(),
-      // css(),
-      // scss(),
+      css(),
+      scss(),
       vue({
         target: "browser",
-        // css: false,
+        css: false,
         exposeFilename: false,
-        preprocessStyles: true,
         // PostCSS-modules options for <style module> compilation
-        // cssModulesOptions: {
-        //   generateScopedName: "[local]___[hash:base64:5]",
-        // },
+        cssModulesOptions: {
+          generateScopedName: "[local]___[hash:base64:5]",
+        },
       }),
       PostCSS(),
       typescript({
