@@ -64,3 +64,6 @@ npm run build:esm
 ## reference
 
 - [zhihu](https://zhuanlan.zhihu.com/p/423793783)
+- [Developing personal component library with rollup + vue3](https://qdmana.com/2021/05/20210509184821450j.html)
+- [Component Library( Vue 3 + Rollup)](https://dev.to/shubhadip/vue-3-component-library-270p)
+- [compile SFC style failure](https://github.com/team-innovation/vue-sfc-rollup/issues/79)

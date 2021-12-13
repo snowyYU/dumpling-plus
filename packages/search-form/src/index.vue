@@ -52,6 +52,10 @@ export default defineComponent({
       type: Array,
       default: () => ["search", "reset", "toggle"],
     },
+    blueBtnText: {
+      type: String,
+      default: "查询",
+    },
   },
   data() {
     return {
@@ -534,7 +538,12 @@ export default defineComponent({
                                 onClick: () =>
                                   this.handleFormButtonClick("search"),
                               },
-                              { default: () => "查询" }
+                              {
+                                default: () =>
+                                  this.blueBtnText === "查询"
+                                    ? "查询"
+                                    : this.blueBtnText,
+                              }
                             )
                           );
                         }
