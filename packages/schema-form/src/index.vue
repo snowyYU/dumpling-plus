@@ -496,9 +496,13 @@ export default defineComponent({
       },
       {
         default: () =>
-          h(resolveComponent("el-row"), null, {
-            default: getChildren,
-          }),
+          h(
+            resolveComponent("el-row"),
+            {},
+            {
+              default: getChildren,
+            }
+          ),
       }
     );
   },
