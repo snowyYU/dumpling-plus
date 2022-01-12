@@ -124,6 +124,7 @@ export default defineComponent({
       h(
         DpTable,
         {
+          ref: "tableRef",
           class: "pagination-table__base-table",
           ...(this.tableProps as any),
           ...tableListeners,
@@ -143,6 +144,7 @@ export default defineComponent({
         h(
           DpPagination,
           {
+            ref: "paginationRef",
             class: "pagination",
             ...(this.paginationProps as any),
             "onUpdate:currentPage": (...args: any[]) =>

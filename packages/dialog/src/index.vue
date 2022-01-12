@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, resolveComponent, h, RawProps } from "vue";
-import { ILoadingInstance } from "element-plus";
+import { ElLoading } from "element-plus";
 import { defaultConfig } from "./config";
 
 const emits = ["open", "opened", "close", "closed"];
@@ -43,14 +43,14 @@ export default defineComponent({
   },
   data() {
     return {
-      loadingInstance: null as ILoadingInstance | null,
+      loadingInstance: null as any,
     };
   },
   watch: {
     loading: {
       handler(newVal) {
         if (newVal) {
-          this.loadingInstance = this.$loading({
+          this.loadingInstance = ElLoading.service({
             body: true,
             lock: true,
           });

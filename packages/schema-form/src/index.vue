@@ -71,9 +71,14 @@ export default defineComponent({
         }
 
         if (
-          ["input", "input-number", "textarea", "select", "cascader"].includes(
-            schemaItem.type
-          )
+          [
+            "input",
+            "input-number",
+            "autocomplete",
+            "textarea",
+            "select",
+            "cascader",
+          ].includes(schemaItem.type)
         ) {
           if (!(schemaItem.fieldProps as any).placeholder) {
             (schemaItem.fieldProps as any).placeholder =
@@ -134,6 +139,7 @@ export default defineComponent({
     "input",
     "blur",
     "change",
+    "select",
     "visible-change",
     "upload-update",
     "file-success",
@@ -230,6 +236,15 @@ export default defineComponent({
     },
 
     /**
+     * 选中事件
+     * @param {string} key
+     * @param {unknown} value
+     */
+    handleSelect(key: string, value: unknown) {
+      this.$emit("select", key, value);
+    },
+
+    /**
      * 下拉框出现/隐藏时触发
      * @param {string} key
      * @param {boolean} value
@@ -272,6 +287,18 @@ export default defineComponent({
           onInput: (value: string | number) =>
             this.handleInput(item.key, value),
           onBlur: () => this.handleBlur(item.key),
+        });
+      } else if (item.type === "autocomplete") {
+        // 输入建议
+        return h(resolveComponent("el-autocomplete"), {
+          modelValue: this.model[item.key],
+          ...item.fieldProps,
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
+          onChange: (value: string | number) =>
+            this.handleChange(item.key, value),
+          onSelect: (value: string | number) =>
+            this.handleSelect(item.key, value),
         });
       } else if (item.type === "input-number") {
         // 数字输入框
@@ -399,6 +426,10 @@ export default defineComponent({
 
     const getChildren = () => {
       return this.mergeSchema.map((item: Schema) => {
+        if (typeof item.visible !== "undefined" && !item.visible) {
+          return null;
+        }
+
         return h(
           resolveComponent("el-col"),
           { ...(item.layoutProps || {}) },
@@ -417,10 +448,6 @@ export default defineComponent({
                   height: item.height,
                 });
               } else {
-                if (typeof item.visible !== "undefined" && !item.visible) {
-                  return [];
-                }
-
                 const rawSlots: RawSlots = {
                   default: () => getFormField(item),
                 };
@@ -469,13 +496,9 @@ export default defineComponent({
       },
       {
         default: () =>
-          h(
-            resolveComponent("el-row"),
-            {},
-            {
-              default: getChildren,
-            }
-          ),
+          h(resolveComponent("el-row"), null, {
+            default: getChildren,
+          }),
       }
     );
   },

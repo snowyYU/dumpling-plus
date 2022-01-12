@@ -204,6 +204,19 @@ export default defineComponent({
     },
 
     /**
+     * 对部分表单字段进行校验的方法
+     */
+    validateField(
+      props: string | Array<string>,
+      cb: (isValid?: string, invalidFields?: any) => void
+    ) {
+      (this.$refs.formRef as InstanceType<typeof ElForm>)?.validateField(
+        props,
+        cb
+      );
+    },
+
+    /**
      * 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
      */
     clearValidate(props?: string | string[]) {
@@ -228,7 +241,6 @@ export default defineComponent({
      * @param {unknown} value
      */
     handleUpdateModelValue(key: string, value: unknown, scope: any) {
-      // console.log(key, value);
       // const row = {
       //   ...scope.row,
       //   [key]: value,
@@ -307,6 +319,7 @@ export default defineComponent({
         })
       );
     }
+
     if (this.isMultiSelect) {
       tableChildren.push(
         h(resolveComponent("el-table-column"), {
@@ -411,10 +424,23 @@ export default defineComponent({
                       return scope.row[column.prop as string];
                     } else if (column.type === "input") {
                       // 输入框
+                      let customDisabledName = `${column.prop}_disabled`;
+                      if (column.customDisabledName) {
+                        customDisabledName = column.customDisabledName;
+                      }
+
+                      let fieldProps = { ...column.fieldProps };
+
+                      if (
+                        typeof scope.row[customDisabledName] !== "undefined"
+                      ) {
+                        fieldProps.disabled = scope.row[customDisabledName];
+                      }
+
                       return h(resolveComponent("el-input"), {
                         modelValue: scope.row[column.prop as string],
                         placeholder: this.getPlaceholder(column),
-                        ...column.fieldProps,
+                        ...fieldProps,
                         "onUpdate:modelValue": (value: unknown) =>
                           this.handleUpdateModelValue(
                             column.prop as string,
@@ -513,6 +539,37 @@ export default defineComponent({
                             scope
                           ),
                       });
+                    } else if (column.type === "switch") {
+                      // 开关
+                      let customDisabledName = `${column.prop}_disabled`;
+                      if (column.customDisabledName) {
+                        customDisabledName = column.customDisabledName;
+                      }
+
+                      let fieldProps = { ...column.fieldProps };
+
+                      if (
+                        typeof scope.row[customDisabledName] !== "undefined"
+                      ) {
+                        fieldProps.disabled = scope.row[customDisabledName];
+                      }
+
+                      return h(resolveComponent("el-switch"), {
+                        modelValue: scope.row[column.prop as string],
+                        ...fieldProps,
+                        "onUpdate:modelValue": (value: unknown) =>
+                          this.handleUpdateModelValue(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                        onChange: (value: unknown) =>
+                          this.handleChange(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                      });
                     }
                   },
                 });
@@ -543,20 +600,20 @@ export default defineComponent({
 
     tableChildren = tableChildren.concat(formTable);
     if (this.mode !== Mode.detail && this.showOperation) {
-      if (this.$slots.operation) {
-        tableChildren.push(this.$slots.operation());
-      } else {
-        tableChildren.push(
-          h(
-            resolveComponent("el-table-column"),
-            {
-              label: "操作",
-              width: 100,
-              fixed: "right",
-              ...this.operationProps,
-            },
-            {
-              default: (scope: any) => {
+      tableChildren.push(
+        h(
+          resolveComponent("el-table-column"),
+          {
+            label: "操作",
+            width: 100,
+            fixed: "right",
+            ...this.operationProps,
+          },
+          {
+            default: (scope: any) => {
+              if (this.$slots.operation) {
+                return this.$slots.operation(scope);
+              } else {
                 return h(
                   resolveComponent("el-button"),
                   {
@@ -566,11 +623,11 @@ export default defineComponent({
                   },
                   { default: () => "删除" }
                 );
-              },
-            }
-          )
-        );
-      }
+              }
+            },
+          }
+        )
+      );
     }
     const loading = resolveDirective("loading") as Directive;
     const tableElement = withDirectives(

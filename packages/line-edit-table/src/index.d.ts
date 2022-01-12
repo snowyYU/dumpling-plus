@@ -8,4 +8,5 @@ export interface Column {
   visible?: boolean;
   customOptionsName?: string;
   customRulesName?: string;
+  customDisabledName?: string;
 }
