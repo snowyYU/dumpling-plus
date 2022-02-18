@@ -1,6 +1,6 @@
 <script lang="ts">
-import { defineComponent, resolveComponent, PropType, h } from "vue";
-// import { ElSelect } from "element-plus";
+import { defineComponent, resolveComponent, PropType, h, ref } from "vue";
+import { ElSelect } from "element-plus";
 
 const emits = [
   "change",
@@ -20,12 +20,13 @@ export default defineComponent({
       default: () => ({}),
     },
     options: {
-      type: Array as PropType<Array<{ [propName: string]: string }>>,
+      type: Array as PropType<Array<Record<string, any>>>,
       default: () => [],
     },
   },
   emits,
-  render() {
+  setup(props, { attrs, slots, emit, expose }) {
+    const selectRef = ref<InstanceType<typeof ElSelect>>();
     // 事件监听器
     const listeners: { [propName: string]: (param?: string) => void } = {};
     emits.forEach((key) => {
@@ -34,41 +35,39 @@ export default defineComponent({
           item.replace("-", "").toUpperCase()
         )}`
       ] = (...args) => {
-        this.$emit(key, ...args);
+        emit(key, ...args);
       };
     });
 
     const getChildren = () => {
-      const { label = "label", value = "value", key = "" } = this.props || {};
-      if (key) {
-        return this.options?.map((item) => {
-          return h(resolveComponent("el-option"), {
-            ...item,
-            label: item[label],
-            value: item[value],
-            key: item[key],
-          });
-        });
-      } else {
-        return this.options?.map((item) => {
-          return h(resolveComponent("el-option"), {
-            ...item,
-            label: item[label],
-            value: item[value],
-          });
-        });
-      }
+      const { label = "label", value = "value" } = props.props || {};
+      return props.options?.map((item) => {
+        const elOptionProps: Record<string, any> = {
+          ...item,
+          label: item[label],
+          value: item[value],
+          key: item[value],
+        };
+        return h(resolveComponent("el-option"), elOptionProps);
+      });
     };
-    if (this.$attrs.remote) {
+
+    if (attrs.remote) {
       listeners["remote-method"] = (query: any) => {
-        this.$emit("remoteSearch", query);
+        emit("remoteSearch", query);
       };
     }
-    return h(
-      resolveComponent("el-select"),
-      { ...this.$attrs, ...listeners, ref: "selectRef" },
-      { default: getChildren, ...this.$slots }
-    );
+
+    const getSelectRef = () => selectRef.value;
+
+    expose({ getSelectRef });
+
+    return () =>
+      h(
+        resolveComponent("el-select"),
+        { ...attrs, ...listeners, ref: selectRef },
+        { default: getChildren, ...slots }
+      );
   },
 });
 </script>
