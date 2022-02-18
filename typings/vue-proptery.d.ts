@@ -1,7 +1,8 @@
 import { ConcreteComponent, VNode, VNodeArrayChildren, VNodeProps } from "vue";
 import { ElMessage, ElLoading, ElPopconfirm } from "element-plus";
 import NP from "number-precision";
-declare module "@vue/runtime-core" {
+// declare module "@vue/runtime-core" {
+declare module "vue" {
   export interface ComponentCustomProperties {
     $message: ElMessage;
     $confirm: ElPopconfirm;

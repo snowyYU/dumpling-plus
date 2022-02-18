@@ -103,7 +103,7 @@ export default defineComponent({
     },
   },
   computed: {
-    mergeTableProps() {
+    mergeTableProps(): any {
       return {
         ...defaultTableProps,
         ...this.$attrs,
