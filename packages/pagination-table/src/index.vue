@@ -2,12 +2,16 @@
 import {
   defineComponent,
   h,
-  RawSlots,
+  // RawProps,
   // resolveComponent,
   // Slot,
+  ref,
+  computed,
+  // getCurrentInstance,
 } from "vue";
-import DpTable from "../../table/src/index.vue";
-import DpPagination from "../../pagination/src/index.vue";
+import type { RawSlots } from "vue";
+import DpTable from "@/packages/table/src/index.vue";
+import DpPagination from "@/packages/pagination/src/index.vue";
 import { camelCaseToKebabCase } from "@/utils/index";
 
 const paginationPropNames = [
@@ -32,12 +36,12 @@ const paginationPropNames = [
 ];
 
 function filterValues<T>(
-  a: { [propName: string]: unknown },
+  a: Record<string, any>,
   b: Array<string>,
   c: number | undefined = 0
 ) {
   const formatB = b.map(camelCaseToKebabCase);
-  const values: { [propName: string]: unknown } = {};
+  const values: Record<string, any> = {};
   Object.keys(a).forEach((key) => {
     const formatKey = camelCaseToKebabCase(key);
     if (c) {
@@ -51,7 +55,7 @@ function filterValues<T>(
     //   values[formatKey] = a[formatKey];
     // }
   });
-  return values as unknown as T;
+  return values as T;
 }
 
 const tableEmits = [
@@ -85,29 +89,28 @@ export default defineComponent({
       default: true,
     },
   },
-  computed: {
-    hasParentTable() {
-      return this.$parent?.$options.name === "IntegratedPage";
-    },
-    // 表格参数
-    tableProps() {
-      return filterValues(this.$attrs, paginationPropNames);
-    },
-    // 分页参数
-    paginationProps() {
-      return filterValues(this.$attrs, paginationPropNames, 1);
-    },
-  },
   emits: [...tableEmits, ...paginationEmits],
-  methods: {
-    /**
-     * updateModelValue 事件
-     */
-    handleUpdateModelValue(key: string, ...args: Array<unknown>) {
-      this.$emit(`update:${key}`, ...args);
-    },
-  },
-  render() {
+  setup(props, { attrs, slots, emit, expose }) {
+    // const internalInstance = getCurrentInstance();
+    const tableRef = ref<InstanceType<typeof DpTable>>();
+    const paginationRef = ref<InstanceType<typeof DpPagination>>();
+
+    // const hasParentTable = computed(() => {
+    //   return (
+    //     internalInstance?.proxy?.$parent?.$options.name === "IntegratedPage"
+    //   );
+    // });
+
+    // 表格参数
+    const tableProps = computed(() => {
+      return filterValues(attrs, paginationPropNames);
+    });
+
+    // 分页参数
+    const paginationProps = computed(() => {
+      return filterValues(attrs, paginationPropNames, 1);
+    });
+
     // 事件监听器
     const tableListeners: { [propName: string]: () => void } = {};
     tableEmits.forEach((key) => {
@@ -116,48 +119,64 @@ export default defineComponent({
           item.replace("-", "").toUpperCase()
         )}`
       ] = (...args) => {
-        this.$emit(key, ...args);
+        emit(key, ...args);
       };
     });
 
-    const children = [
-      h(
-        DpTable,
-        {
-          ref: "tableRef",
-          class: "pagination-table__base-table",
-          ...(this.tableProps as any),
-          ...tableListeners,
-        },
-        this.$slots
-      ),
-    ];
+    /**
+     * updateModelValue 事件
+     */
+    const handleUpdateModelValue = (key: string, ...args: Array<unknown>) => {
+      emit(`update:${key}`, ...args);
+    };
 
-    if (this.showPagination) {
-      const paginationSlots: RawSlots = {};
+    const getChildren = () => {
+      const children = [
+        h(
+          DpTable,
+          {
+            ref: tableRef,
+            class: "pagination-table__base-table",
+            ...(tableProps.value as any),
+            ...tableListeners,
+          },
+          slots
+        ),
+      ];
 
-      if (this.$slots["pagination-left"]) {
-        paginationSlots.left = this.$slots["pagination-left"];
+      if (props.showPagination) {
+        const paginationSlots: RawSlots = {};
+
+        if (slots["pagination-left"]) {
+          paginationSlots.left = slots["pagination-left"];
+        }
+
+        children.push(
+          h(
+            DpPagination,
+            {
+              ref: paginationRef,
+              class: "pagination",
+              ...(paginationProps.value as any),
+              "onUpdate:currentPage": (...args: any[]) =>
+                handleUpdateModelValue("current-page", ...args),
+              "onUpdate:pageSize": (...args: any[]) =>
+                handleUpdateModelValue("page-size", ...args),
+            },
+            paginationSlots
+          )
+        );
       }
 
-      children.push(
-        h(
-          DpPagination,
-          {
-            ref: "paginationRef",
-            class: "pagination",
-            ...(this.paginationProps as any),
-            "onUpdate:currentPage": (...args: any[]) =>
-              this.handleUpdateModelValue("current-page", ...args),
-            "onUpdate:pageSize": (...args: any[]) =>
-              this.handleUpdateModelValue("page-size", ...args),
-          },
-          paginationSlots
-        )
-      );
-    }
+      return children;
+    };
 
-    return h("div", { class: "pagination-table" }, children);
+    expose({
+      getTableRef: () => tableRef.value,
+      getPaginationRef: () => paginationRef.value,
+    });
+
+    return () => h("div", { class: "pagination-table" }, getChildren());
   },
 });
 </script>

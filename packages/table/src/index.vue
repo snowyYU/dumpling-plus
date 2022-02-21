@@ -4,14 +4,15 @@ import {
   resolveComponent,
   resolveDirective,
   withDirectives,
-  PropType,
   h,
-  Slot,
-  Directive,
+  ref,
+  computed,
+  getCurrentInstance,
 } from "vue";
-import { ElTable } from "element-plus";
-import { Column } from "./index.d";
+import type { PropType, Slot, Directive } from "vue";
+import { ElTable, ElMessage, ElMessageBox } from "element-plus";
 import { defaultTableProps } from "./config";
+import type { Column } from "./index.d";
 
 const emits = [
   "select",
@@ -60,11 +61,7 @@ export default defineComponent({
     // 控制 checkbox 是否可选
     selectable: {
       type: Function,
-      default() {
-        return () => {
-          return true;
-        };
-      },
+      default: () => () => true,
     },
     // 操作列
     showOperation: {
@@ -102,54 +99,59 @@ export default defineComponent({
       default: false,
     },
   },
-  computed: {
-    mergeTableProps(): any {
+  emits: [...emits, "detail-click", "edit-click", "delete-click"],
+  setup(props, { attrs, slots, emit, expose }) {
+    const internalInstance = getCurrentInstance();
+    const tableRef = ref<InstanceType<typeof ElTable>>();
+
+    const mergeTableProps = computed(() => {
       return {
         ...defaultTableProps,
-        ...this.$attrs,
+        ...attrs,
       };
-    },
-    hasParentTable() {
-      return this.$parent?.$options.name === "PaginationTable";
-    },
-  },
-  emits: [...emits, "detail-click", "edit-click", "delete-click"],
-  methods: {
-    toggleRowSelection(row: any, selected: any) {
-      (this.$refs.tableRef as InstanceType<typeof ElTable>).toggleRowSelection(
-        row,
-        selected
-      );
-    },
+    });
 
-    handleOperation(scope: any, type: "detail" | "edit" | "delete") {
+    const hasParentTable = computed(() => {
+      return (
+        internalInstance?.proxy?.$parent?.$options.name === "PaginationTable"
+      );
+    });
+
+    // 事件监听器
+    const listeners: { [propName: string]: () => void } = {};
+    emits.forEach((key) => {
+      listeners[
+        `on${key.replace(/(^[a-z])|(-[a-z])/g, (item) =>
+          item.replace("-", "").toUpperCase()
+        )}`
+      ] = (...args) => {
+        emit(key, ...args);
+      };
+    });
+
+    const toggleRowSelection = (row: any, selected: any) => {
+      tableRef.value?.toggleRowSelection(row, selected);
+    };
+
+    const handleOperation = (
+      scope: any,
+      type: "detail" | "edit" | "delete"
+    ) => {
       switch (type) {
         case "detail":
-          this.$emit(
-            "detail-click",
-            scope.$index,
-            scope.row,
-            scope.column,
-            scope
-          );
+          emit("detail-click", scope.$index, scope.row, scope.column, scope);
 
           break;
         case "edit":
-          this.$emit(
-            "edit-click",
-            scope.$index,
-            scope.row,
-            scope.column,
-            scope
-          );
+          emit("edit-click", scope.$index, scope.row, scope.column, scope);
 
           break;
         case "delete":
-          if (this.deleteConfirm) {
+          if (props.deleteConfirm) {
             // 删除确认框
-            this.$confirm(
-              (this.deleteConfirm as Array<any>)[0]
-                ? (this.deleteConfirm as Array<any>)[0]
+            ElMessageBox.confirm(
+              (props.deleteConfirm as Array<any>)[0]
+                ? (props.deleteConfirm as Array<any>)[0]
                 : "确认删除吗",
               "提示",
               {
@@ -159,7 +161,7 @@ export default defineComponent({
               }
             )
               .then(() => {
-                this.$emit(
+                emit(
                   "delete-click",
                   scope.$index,
                   scope.row,
@@ -168,21 +170,15 @@ export default defineComponent({
                 );
               })
               .catch(() => {
-                this.$message({
+                ElMessage({
                   type: "info",
-                  message: (this.deleteConfirm as Array<any>)[1]
-                    ? (this.deleteConfirm as Array<any>)[1]
+                  message: (props.deleteConfirm as Array<any>)[1]
+                    ? (props.deleteConfirm as Array<any>)[1]
                     : "已取消删除",
                 });
               });
           } else {
-            this.$emit(
-              "delete-click",
-              scope.$index,
-              scope.row,
-              scope.column,
-              scope
-            );
+            emit("delete-click", scope.$index, scope.row, scope.column, scope);
           }
 
           break;
@@ -190,48 +186,35 @@ export default defineComponent({
         default:
           break;
       }
-    },
-  },
-  render() {
-    // 事件监听器
-    const listeners: { [propName: string]: () => void } = {};
-    emits.forEach((key) => {
-      listeners[
-        `on${key.replace(/(^[a-z])|(-[a-z])/g, (item) =>
-          item.replace("-", "").toUpperCase()
-        )}`
-      ] = (...args) => {
-        this.$emit(key, ...args);
-      };
-    });
+    };
 
     const getElementColumns = () => {
       const finallyElementColumns = [];
 
-      if (this.isMultiSelect) {
+      if (props.isMultiSelect) {
         finallyElementColumns.push(
           h(resolveComponent("el-table-column"), {
             fixed: "left",
             type: "selection",
             width: "55",
             align: "center",
-            selectable: this.selectable,
+            selectable: props.selectable,
           })
         );
       }
 
-      if (this.isIndex) {
+      if (props.isIndex) {
         finallyElementColumns.push(
           h(resolveComponent("el-table-column"), {
             type: "index",
             width: "50",
             align: "center",
-            label: this.indexTitle,
+            label: props.indexTitle,
           })
         );
       }
 
-      if (this.isExpand) {
+      if (props.isExpand) {
         finallyElementColumns.push(
           h(
             resolveComponent("el-table-column"),
@@ -239,13 +222,13 @@ export default defineComponent({
               type: "expand",
             },
             {
-              default: this.$slots.expand_slot,
+              default: slots.expand_slot,
             }
           )
         );
       }
 
-      this.columns
+      props.columns
         .filter((column) => column.visible !== false)
         .forEach((item: Column) => {
           // 渲染单个 column
@@ -256,7 +239,7 @@ export default defineComponent({
               {
                 // 表头
                 header: ({ column, $index }: any) => {
-                  // const dataSource = this.$attrs.data || [];
+                  // const dataSource = attrs.data || [];
                   const slotProps: any = {
                     item,
                     column,
@@ -270,13 +253,11 @@ export default defineComponent({
                   // ) {
                   //   slotProps.row = dataSource[$index];
                   // }
-                  if (this.hasParentTable && this.$slots?.header) {
-                    return (this.$slots?.header as Slot)(slotProps);
+                  if (hasParentTable.value && slots?.header) {
+                    return (slots?.header as Slot)(slotProps);
                   } else {
-                    if (this.$slots[`${item.prop}_header`]) {
-                      return (this.$slots[`${item.prop}_header`] as Slot)(
-                        slotProps
-                      );
+                    if (slots[`${item.prop}_header`]) {
+                      return (slots[`${item.prop}_header`] as Slot)(slotProps);
                     } else {
                       return h("span", null, item.label);
                     }
@@ -284,16 +265,16 @@ export default defineComponent({
                 },
                 // 内容
                 default: ({ row, column, $index }: any) => {
-                  if (this.hasParentTable && this.$slots?.default) {
-                    return (this.$slots?.default as Slot)({
+                  if (hasParentTable.value && slots?.default) {
+                    return (slots?.default as Slot)({
                       item,
                       row,
                       column,
                       index: $index,
                     });
                   } else {
-                    if (item.prop && this.$slots[item.prop]) {
-                      return (this.$slots[item.prop as string] as Slot)({
+                    if (item.prop && slots[item.prop]) {
+                      return (slots[item.prop as string] as Slot)({
                         item,
                         row,
                         column,
@@ -355,7 +336,7 @@ export default defineComponent({
             if (item.dpColumn) {
               return h(
                 resolveComponent("el-table-column"),
-                { label: item.label },
+                { ...item },
                 {
                   default() {
                     return item.dpColumn.map((column: Column) =>
@@ -384,7 +365,7 @@ export default defineComponent({
           finallyElementColumns.push(renderElTableColumn(item));
         });
 
-      if (this.showOperation) {
+      if (props.showOperation) {
         const buttonNames = { detail: "详情", edit: "编辑", delete: "删除" };
 
         finallyElementColumns.push(
@@ -392,18 +373,18 @@ export default defineComponent({
             resolveComponent("el-table-column"),
             {
               label: "操作",
-              width: this.operationWidth,
-              fixed: this.operationFixed,
+              width: props.operationWidth,
+              fixed: props.operationFixed,
             },
             {
-              default: (props: any) => {
-                if (this.$slots.operation) {
-                  return (this.$slots?.operation as Slot)(props);
+              default: (defaultProps: any) => {
+                if (slots.operation) {
+                  return (slots?.operation as Slot)(defaultProps);
                 } else {
-                  return this.operationBtns.map((btn: any) => {
+                  return props.operationBtns.map((btn: any) => {
                     const buttonProps = {
                       type: "text",
-                      onClick: this.handleOperation(props, btn),
+                      onClick: handleOperation(defaultProps, btn),
                     };
 
                     if (btn === "delete") {
@@ -434,14 +415,16 @@ export default defineComponent({
       return withDirectives(
         h(
           resolveComponent("el-table"),
-          { ...this.mergeTableProps, ...listeners, ref: "tableRef" },
+          { ...mergeTableProps.value, ...listeners, ref: tableRef },
           { default: getElementColumns }
         ),
-        [[loading, this.loading]]
+        [[loading, props.loading]]
       );
     };
 
-    return h("div", { class: "table" }, getElementTable());
+    expose({ toggleRowSelection, getTableRef: () => tableRef.value });
+
+    return () => h("div", { class: "table" }, getElementTable());
   },
 });
 </script>
