@@ -24,6 +24,8 @@ export default [
         globals: {
           vue: "Vue",
           lodash: "lodash",
+          "lodash/cloneDeep": "lodash.cloneDeep",
+          "element-plus": "elementPlus",
         },
       },
     ],
@@ -49,7 +51,11 @@ export default [
           compilerOptions: {
             declaration: true,
           },
-          include: ["packages/**/*", "typings/shims-vue.d.ts"],
+          include: [
+            "packages/**/*",
+            "typings/shims-vue.d.ts",
+            "typings/vue-proptery.d.ts",
+          ],
           exclude: ["node_modules", "packages/**/__tests__/*"],
         },
         abortOnError: false,
