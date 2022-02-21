@@ -113,7 +113,7 @@ export default defineComponent({
             resolveComponent("el-select"),
             {
               modelValue: this.pageSize,
-              size: "small",
+              // size: "small",
               "onUpdate:modelValue": (value: any) =>
                 this.$emit("update:page-size", value),
             },
@@ -149,7 +149,7 @@ export default defineComponent({
         "跳至",
         h(resolveComponent("el-input"), {
           modelValue: this.jumpPage,
-          size: "small",
+          // size: "small",
           "onUpdate:modelValue": (value: string) => (this.jumpPage = value),
           onKeyup: this.handleEnter,
           onBlur: this.handleBlur,

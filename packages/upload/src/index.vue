@@ -13,9 +13,7 @@
       :disabled="disabled"
     >
       <!-- with-credentials 如果需要带上cookie记得设为 true -->
-      <el-button :disabled="disabled" size="small" type="primary"
-        >点击上传</el-button
-      >
+      <el-button :disabled="disabled" type="primary">点击上传</el-button>
     </el-upload>
     <div class="custom-file-list" v-if="showCustomFileList">
       <ul>

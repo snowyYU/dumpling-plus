@@ -1,6 +1,6 @@
 export const defaultFormProps = {
   inline: false,
-  size: "small",
+  // size: "small",
 };
 
 export const defaultFormItemProps = {

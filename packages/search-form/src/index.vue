@@ -561,7 +561,7 @@ export default defineComponent({
                               resolveComponent("el-button"),
                               {
                                 type: "primary",
-                                size: "small",
+                                // size: "small",
                                 onClick: () =>
                                   this.handleFormButtonClick("search"),
                               },
@@ -581,7 +581,7 @@ export default defineComponent({
                               resolveComponent("el-button"),
                               {
                                 type: "default",
-                                size: "small",
+                                // size: "small",
                                 onClick: () =>
                                   this.handleFormButtonClick("reset"),
                               },
@@ -596,7 +596,7 @@ export default defineComponent({
                               resolveComponent("el-button"),
                               {
                                 type: "default",
-                                size: "small",
+                                // size: "small",
                                 onClick: () =>
                                   this.handleFormButtonClick("toggle"),
                               },

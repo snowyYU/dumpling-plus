@@ -116,7 +116,7 @@ export default defineComponent({
         group.push(
           h(
             resolveComponent("el-button"),
-            { size: "small", onClick: this.handleCancel },
+            { onClick: this.handleCancel },
             { default: () => this.cancelText }
           )
         );
@@ -128,7 +128,7 @@ export default defineComponent({
             resolveComponent("el-button"),
             {
               type: "primary",
-              size: "small",
+              // size: "small",
               loading: this.confirmLoading,
               onClick: this.handleConfirm,
             },

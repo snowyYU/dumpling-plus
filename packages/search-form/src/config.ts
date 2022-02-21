@@ -17,7 +17,7 @@ export const defaultLayoutConfig = {
 
 export const defaultFormProps = {
   inline: true,
-  size: "small",
+  // size: "small",
 };
 
 export const defaultLayoutProps = {
