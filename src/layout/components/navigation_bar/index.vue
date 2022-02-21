@@ -77,7 +77,7 @@ import Hamburger from "@/components/hamburger/index.vue";
 import Screenfull from "@/components/screenfull/index.vue";
 import SwitchStore from "./SwitchStore.vue";
 // import SizeSelect from '@/components/size_select/index.vue'
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent } from "vue";
 import { computed, ref } from "vue";
 // import { computed, reactive, toRefs } from "vue";
 import { useStore } from "@/store";
