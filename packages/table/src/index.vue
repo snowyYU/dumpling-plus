@@ -70,7 +70,7 @@ export default defineComponent({
     },
     // 操作列宽度
     operationWidth: {
-      type: String,
+      type: [String, Number],
       default: "150",
     },
     // 控制操作列显示按钮
