@@ -1,3 +1,6 @@
+## 2020.02.24
+新增 custom-update 事件
+
 ## 2021.08.27
 
 ```javascript

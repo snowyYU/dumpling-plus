@@ -135,6 +135,7 @@ export default defineComponent({
     },
   },
   emits: [
+    "custom-update",
     "update:model",
     "input",
     "blur",
@@ -206,6 +207,7 @@ export default defineComponent({
         ...this.model,
         [key]: value,
       };
+      this.$emit("custom-update", key, value);
       this.$emit("update:model", fields);
     },
 
