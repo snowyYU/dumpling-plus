@@ -1,6 +1,6 @@
 {
   "name": "dumpling-plus",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "vue3 dumpling plus",
   "private": false,
   "main": "lib/index.umd.js",
