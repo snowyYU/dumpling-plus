@@ -17,16 +17,12 @@
     "core-js": "^3.21.1",
     "dayjs": "^1.10.7",
     "dumpling-plus": "^0.2.1",
-    "element-plus": "^2.0.2",
     "js-cookie": "^3.0.1",
-    "js-file-download": "^0.4.12",
-    "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
     "path-browserify": "^0.0.1",
     "regenerator-runtime": "^0.13.9",
     "register-service-worker": "^1.7.2",
     "screenfull": "^5.2.0",
-    "vue": "^3.2.31",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
@@ -65,6 +61,12 @@
     "sass-loader": "^8.0.2",
     "typescript": "~4.1.6",
     "webpackbar": "^5.0.2"
+  },
+  "peerDependencies": {
+    "element-plus": "^2.0.2",
+    "js-file-download": "^0.4.12",
+    "lodash": "^4.17.21",
+    "vue": "^3.2.31"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
