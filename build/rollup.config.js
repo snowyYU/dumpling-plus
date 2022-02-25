@@ -8,7 +8,7 @@ import scss from "rollup-plugin-scss";
 import typescript from "rollup-plugin-typescript2";
 import PostCSS from "rollup-plugin-postcss";
 import pkg from "../package.json";
-const deps = Object.keys(pkg.dependencies);
+const deps = [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies)];
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const vue = require("rollup-plugin-vue");
 
