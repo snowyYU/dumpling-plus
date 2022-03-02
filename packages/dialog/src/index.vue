@@ -100,6 +100,15 @@ export default defineComponent({
 
     if (!this.$attrs.fullscreen) {
       dialogProps.customClass = "limit_height";
+      let customClass = "";
+      if (this.$attrs["custom-class"]) {
+        customClass = this.$attrs["custom-class"];
+      } else if (this.$attrs.customClass) {
+        customClass = this.$attrs.customClass;
+      }
+      if (typeof customClass === "string" && customClass) {
+        dialogProps.customClass += " " + customClass;
+      }
     }
 
     const getDialogFooter = () => {
