@@ -8,6 +8,12 @@ npm i dumpling-plus -S
 
 ```javascript
 import DumplingPlus from "dumpling-plus";
+app.use(DumplingPlus);
+```
+
+```javascript
+// 使用上传组件
+import DumplingPlus from "dumpling-plus";
 import { downloadResponseById, uploadFile } from "@/apis/common";
 app.use(DumplingPlus, { downloadResponseById, uploadFile });
 ```
@@ -20,8 +26,11 @@ clone this project and `npm run serve`,it will start a demo project
 
 > initial version only has umd version bundle,others will come soon
 
-```
-npm run build:esm
+```shell
+# npm run build:esm
+npm run build:rollup-umd
+npm version patch
+npm publish
 ```
 
 ## directory explain
