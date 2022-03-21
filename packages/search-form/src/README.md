@@ -1,3 +1,7 @@
+## 2022.03.21
+
+新增 initToggleStatus 参数，用以控制展开状态，默认值为 true（展开）
+
 ## 2021.09.07
 
 将 item 上的 visible 属性移至上层 col 中，使之 visible 为 false 时不会有占位空间

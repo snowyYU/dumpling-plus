@@ -56,10 +56,14 @@ export default defineComponent({
       type: String,
       default: "查询",
     },
+    initToggleStatus: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
-      toggle: true,
+      toggle: this.initToggleStatus,
     };
   },
   computed: {
