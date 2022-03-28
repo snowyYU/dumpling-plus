@@ -3,9 +3,11 @@
     <el-upload
       ref="upload"
       action=""
+      v-bind="uploadProps"
       :http-request="submitFile"
       :on-success="handleFileSuccess"
       :on-error="handleFileError"
+      :on-exceed="handleExceed"
       :before-upload="handleFileBeforeUpload"
       :accept="accept"
       :file-list="selfFileList"
@@ -13,7 +15,25 @@
       :disabled="disabled"
     >
       <!-- with-credentials 如果需要带上cookie记得设为 true -->
-      <el-button :disabled="disabled" type="primary">点击上传</el-button>
+      <el-button
+        :disabled="disabled"
+        size="small"
+        type="primary"
+        v-if="
+          !$attrs.limit ||
+          (typeof $attrs.limit === 'number' && !selfFileList.length)
+        "
+      >
+        点击上传
+      </el-button>
+      <el-button
+        :disabled="disabled"
+        size="small"
+        type="primary"
+        v-if="typeof $attrs.limit === 'number' && selfFileList.length === 1"
+      >
+        重新上传
+      </el-button>
     </el-upload>
     <div class="custom-file-list" v-if="showCustomFileList">
       <ul>
@@ -88,10 +108,11 @@
 
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { this.uploadFile, downloadResponseById } from '@/api/common'
+// import { this.uploadFile, downloadFileById } from '@/api/common'
 import { defineComponent } from "vue";
 import cloneDeep from "lodash/cloneDeep";
 import fileDownload from "js-file-download";
+import type { UploadFile } from "element-plus/lib/components/upload/src/upload.type";
 
 export default defineComponent({
   name: "DpUpload",
@@ -101,7 +122,7 @@ export default defineComponent({
       type: Function,
       default: () => ({}),
     },
-    downloadResponseById: {
+    downloadFileById: {
       type: Function,
       default: () => ({}),
     },
@@ -112,10 +133,6 @@ export default defineComponent({
     showCustomFileList: {
       type: Boolean,
       default: true,
-    },
-    bizType: {
-      type: String,
-      default: "",
     },
     disabled: {
       type: Boolean,
@@ -149,14 +166,19 @@ export default defineComponent({
         return value;
       },
     },
+    uploadProps() {
+      return this.$attrs;
+    },
   },
-  emits: ["uploadFileSucess", "updateFileList", "removeFile"],
+  emits: ["uploadFileSucess", "updateFileList", "removeFile", "file-exceed"],
   methods: {
     handleFileBeforeUpload(file: any) {
+      console.log("before-upload");
       file.status = "ready";
       file.percentage = 0;
     },
     submitFile(content: any) {
+      console.log("http-request");
       const originFileList = cloneDeep(this.selfFileList);
       let formData = new FormData();
       formData.append("file", content.file);
@@ -179,17 +201,23 @@ export default defineComponent({
       };
       copyFile.disabled = false;
       copyFile.isFocus = false;
-      this.selfFileList.push(copyFile);
+      if (!this.$attrs.limit) {
+        this.selfFileList.push(copyFile);
+      }
       this.uploadFile(formData, onUploadProgress)
         .then((res: any) => {
           if (res.code == "200") {
             content.onSuccess("文件上传成功！");
             copyFile.status = "success";
             this.$emit("uploadFileSucess", { ...copyFile, ...res.data });
-            this.$emit("updateFileList", [
-              ...originFileList,
-              { ...copyFile, ...res.data },
-            ]);
+            if (!this.$attrs.limit) {
+              this.$emit("updateFileList", [
+                ...originFileList,
+                { ...copyFile, ...res.data },
+              ]);
+            } else {
+              this.$emit("updateFileList", [{ ...copyFile, ...res.data }]);
+            }
           } else {
             content.onError("文件上传失败, code:" + res.data.msg);
           }
@@ -200,8 +228,8 @@ export default defineComponent({
     },
     handleFileSuccess(res: any, file: any) {
       console.log("success");
-      console.log("res");
-      console.log("file");
+      // console.log("res", res);
+      // console.log("file", file);
       // debugger;
       // const idx = this.selfFileList.findIndex(item => item.uid === file.uid)
       // this.selfFileList.splice(idx, 1)
@@ -210,7 +238,22 @@ export default defineComponent({
     handleFileError(err: any, file: any) {
       // 使用自定义文件列表需要用到
       // 传入报错信息
+      console.log("error");
       file.msg = err;
+    },
+    // 文件数量超过限制
+    handleExceed(files: File[], uploadFiles: UploadFile[]) {
+      console.log("exceed");
+      if (
+        typeof this.$attrs.limit === "number" &&
+        this.$attrs.limit === 1 &&
+        this.$refs.upload
+      ) {
+        (this.$refs.upload as any).clearFiles();
+        (this.$refs.upload as any).handleStart(files[0]);
+        (this.$refs.upload as any).submit();
+      }
+      this.$emit("file-exceed", files, uploadFiles);
     },
     removeFile(args: any) {
       const { index, fileList } = args;
@@ -254,7 +297,7 @@ export default defineComponent({
         document.body.removeChild(link);
         URL.revokeObjectURL(data.fileUrl);
 
-        // this.downloadResponseById({ id: data.id }).then((res: any) => {
+        // this.downloadFileById({ id: data.id }).then((res: any) => {
         //   this.downloadingArray.splice(
         //     this.downloadingArray.findIndex((item) => item === index),
         //     1
@@ -263,9 +306,9 @@ export default defineComponent({
         //   fileDownload(res, data.fileName);
         // });
 
-        // window.open(downloadResponseById(data.id))
+        // window.open(downloadFileById(data.id))
 
-        // window.location.assign(downloadResponseById(data.id))
+        // window.location.assign(downloadFileById(data.id))
         // const link = document.createElement('a')
 
         // link.style.display = 'none'
@@ -277,9 +320,9 @@ export default defineComponent({
         // document.body.removeChild(link) // 下载完成移除元素
 
         // var link = document.createElement('a')
-        // link.href = downloadResponseById(data.id)
-        // link.download = downloadResponseById(data.id).substr(
-        //   downloadResponseById(data.id).lastIndexOf('/') + 1
+        // link.href = downloadFileById(data.id)
+        // link.download = downloadFileById(data.id).substr(
+        //   downloadFileById(data.id).lastIndexOf('/') + 1
         // )
         // link.click()
 
