@@ -1,9 +1,20 @@
+/*
+ * @Author: jasper
+ * @Date: 2021-12-02 16:49:05
+ * @LastEditors: jasper
+ * @LastEditTime: 2022-04-11 18:01:43
+ * @FilePath: /dumpling-plus/packages/index.ts
+ * @Description:
+ *
+ * Copyright (c) 2022 by 公卫区位大数据前端组, All Rights Reserved.
+ */
 import { App } from "vue";
 import SchemaForm from "./schema-form/index";
 import SearchForm from "./search-form/index";
 import Upload from "./upload/index";
 import Dialog from "./dialog/index";
 import Table from "./table/index";
+import Pagination from "./pagination/index";
 import PaginationTable from "./pagination-table/index";
 import LineEditTable from "./line-edit-table/index";
 
@@ -13,6 +24,7 @@ const components = [
   Upload,
   Dialog,
   Table,
+  Pagination,
   PaginationTable,
   LineEditTable,
 ];
@@ -48,6 +60,7 @@ export default {
   Upload,
   Dialog,
   Table,
+  Pagination,
   PaginationTable,
   LineEditTable,
 };
