@@ -279,7 +279,13 @@ export default defineComponent({
   },
   render() {
     const getFormField = (item: Schema) => {
-      if (item.type === "input") {
+      if (item.type === "rawtext") {
+        return h("div", {
+          // domProps: {
+          innerHTML: this.model[item.key],
+          // },
+        });
+      } else if (item.type === "input") {
         // 输入框
         return h(resolveComponent("el-input"), {
           modelValue: this.model[item.key],
