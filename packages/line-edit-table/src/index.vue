@@ -521,6 +521,42 @@ export default defineComponent({
                             scope
                           ),
                       });
+                    } else if (column.type === "time-picker") {
+                      // 日期时间选择器
+                      return h(resolveComponent("el-time-picker"), {
+                        modelValue: scope.row[column.prop as string],
+                        ...column.fieldProps,
+                        "onUpdate:modelValue": (value: unknown) =>
+                          this.handleUpdateModelValue(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                        onChange: (value: unknown) =>
+                          this.handleChange(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                      });
+                    } else if (column.type === "time-select") {
+                      // 日期时间选择器
+                      return h(resolveComponent("el-time-select"), {
+                        modelValue: scope.row[column.prop as string],
+                        ...column.fieldProps,
+                        "onUpdate:modelValue": (value: unknown) =>
+                          this.handleUpdateModelValue(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                        onChange: (value: unknown) =>
+                          this.handleChange(
+                            column.prop as string,
+                            value,
+                            scope
+                          ),
+                      });
                     } else if (column.type === "date-picker") {
                       // 日期时间选择器
                       return h(resolveComponent("el-date-picker"), {
