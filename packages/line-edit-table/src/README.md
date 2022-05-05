@@ -1,3 +1,7 @@
+## 2022.05.05
+
+添加 time-select ， time-picker types
+
 ## 2021.09.07
 
 ### LineEditTable Attributes
