@@ -1,5 +1,9 @@
 # 新增功能
 
+## 2022.05.13
+
+- 新增 indexWidth operationProps 两个参数
+
 ## 2021.03.30
 
 - 增加参数 useTooltip 表格内容默认显示三行，超出部分省略，通过 Tooltip 方式显示
@@ -41,7 +45,7 @@
 | operationBtns  | 操作列按钮类型             | Array                | -      | ['detail', 'edit', 'delete'] |
 | operationFixed | 控制操作列是否固定         | String               | -      | 'right'                      |
 | deleteConfirm  | 点击删除按钮是否弹出默认框 | Boolean/Array        | -      | false                        |
-| loading        | 表格数据加载状态          | Boolean             | -      | false                        |
+| loading        | 表格数据加载状态           | Boolean              | -      | false                        |
 
 ### Events
 

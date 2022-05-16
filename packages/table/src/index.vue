@@ -53,6 +53,11 @@ export default defineComponent({
       type: String,
       default: "序号",
     },
+    // 序号列标题
+    indexWidth: {
+      type: String,
+      default: "70",
+    },
     // 多选列
     isMultiSelect: {
       type: Boolean,
@@ -67,6 +72,11 @@ export default defineComponent({
     showOperation: {
       type: Boolean,
       default: false,
+    },
+    // 此属性会被透传至 operation column 上
+    operationProps: {
+      type: Object,
+      default: () => ({}),
     },
     // 操作列宽度
     operationWidth: {
@@ -207,7 +217,7 @@ export default defineComponent({
         finallyElementColumns.push(
           h(resolveComponent("el-table-column"), {
             type: "index",
-            width: "50",
+            width: props.indexWidth,
             align: "center",
             label: props.indexTitle,
           })
@@ -373,6 +383,7 @@ export default defineComponent({
             resolveComponent("el-table-column"),
             {
               label: "操作",
+              ...props.operationProps,
               width: props.operationWidth,
               fixed: props.operationFixed,
             },
