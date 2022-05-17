@@ -8,8 +8,6 @@ import {
   Slot,
 } from "vue";
 import { ElForm } from "element-plus";
-// import { Callback } from "element-plus/lib/components/form/src/form.vue";
-import { ValidateFieldCallback } from "element-plus/lib/tokens";
 import DpSelect from "../../select/src/index.vue";
 import DpRadioGroup from "../../radio-group/src/index.vue";
 import DpCheckboxGroup from "../../checkbox-group/src/index.vue";
@@ -198,7 +196,7 @@ export default defineComponent({
     /**
      * 对部分表单字段进行校验的方法
      */
-    validateField(props: string | string[], cb: ValidateFieldCallback) {
+    validateField(props: string | string[], cb: any) {
       (this.$refs.formRef as InstanceType<typeof ElForm>)?.validateField(
         props,
         cb
