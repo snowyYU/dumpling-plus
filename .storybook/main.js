@@ -14,7 +14,7 @@ module.exports = {
   "addons": [
     "@storybook/addon-essentials",
     "@storybook/addon-links",
-    "@storybook/addon-storysource", // 源码插件
+    // "@storybook/addon-storysource", // 源码插件
   ],
   // 框架
   "framework": "@storybook/vue3",
