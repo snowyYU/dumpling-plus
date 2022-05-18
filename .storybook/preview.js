@@ -14,6 +14,8 @@ app.use(elementPlus)
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
+    // 展示完整控件文档
+    expanded: true,
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
