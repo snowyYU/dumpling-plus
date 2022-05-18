@@ -1,48 +1,53 @@
-const { resolve } = require("path");
+const { mergeConfig } = require('vite')
+const { resolve } = require('path')
 
 module.exports = {
+  // stories来源
   "stories": [
     "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)",
-    "../packages/**/*.stories.@(js|jsx|ts|tsx)",
+    "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
+  /**
+   * 插件
+   * https://storybook.js.org/addons
+   */
   "addons": [
-    "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/addon-storysource"   // 查看组件源码
+    "@storybook/addon-links",
+    "@storybook/addon-storysource", // 源码插件
   ],
+  // 框架
   "framework": "@storybook/vue3",
   "core": {
-    "builder": "@storybook/builder-webpack5"
+    "builder": "@storybook/builder-vite"
   },
-  // ts支持
-  typescript: {
-    check: false,
-    checkOptions: {},
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-    },
-  },
-  // 自定义webpack
-  webpackFinal: async (config, { configType }) => {
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
+
+  /**
+   * vite扩展自定义配置
+   * configType as env: 模式，值为"DEVELOPMENT" or "PRODUCTION".
+   */
+  async viteFinal(config, { configType: env }) {
+
+    // 可在cmd打印出信息
+    // console.log( 'config', config )
+
+    return mergeConfig(config, {
+      base: './',
+      resolve: {
+        alias: {
+          "@": resolve("src"),
+          "*": resolve(""),
+          "~": resolve("packages"),
+        },
+      },
+      module: {
+        rules: [
+          {
+            test: /\.scss$/,
+            use: ['style-loader', 'css-loader', 'sass-loader'],
+          }
+        ]
+      },
     });
-
-    Object.assign(config.resolve.alias,{
-      "@": resolve("src"),
-      "*": resolve(""),
-      "~": resolve("packages"),
-      '@assets': resolve("src/assets"),
-    })
-
-    config.devtool = 'source-map'
-    config.mode = 'development'
-
-    return config;
   },
 }

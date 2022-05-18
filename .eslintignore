@@ -1,4 +1,5 @@
 config
 vue.config.js
+vite.config.js
 config/rollup.config.js
 build

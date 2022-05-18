@@ -102,9 +102,9 @@ export default defineComponent({
       dialogProps.customClass = "limit_height";
       let customClass = "";
       if (this.$attrs["custom-class"]) {
-        customClass = this.$attrs["custom-class"];
+        customClass = this.$attrs["custom-class"] as string;
       } else if (this.$attrs.customClass) {
-        customClass = this.$attrs.customClass;
+        customClass = this.$attrs.customClass as string;
       }
       if (typeof customClass === "string" && customClass) {
         dialogProps.customClass += " " + customClass;

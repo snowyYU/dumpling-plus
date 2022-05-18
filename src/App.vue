@@ -1,5 +1,6 @@
 <template>
-  <router-view />
+  <!-- <router-view /> -->
+  <div>Hello</div>
 </template>
 
 <style lang="scss">
