@@ -34,10 +34,6 @@ module.exports = {
           }
         ]
       },
-      // build: {
-      //   outDir: "storybook-build-view",
-      //   assetsDir: "static",
-      // },
     });
   },
 }
