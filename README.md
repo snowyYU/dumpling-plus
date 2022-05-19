@@ -1,9 +1,20 @@
 # dumpling-plus
 
+business components base element-plus
+
+strongly recomend use pnpm to manage packages
+
+## about tech & libs
+
+- [element-plus](https://element-plus.org/zh-CN/)
+- [strory-book](https://storybook.js.org/docs/7.0/vue/get-started/introduction)
+- [pnpm](https://pnpm.io/)
+- [vite](https://vitejs.dev/)
+
 ## usage
 
 ```
-npm i dumpling-plus -S
+pnpm add dumpling-plus
 ```
 
 ```javascript
@@ -20,15 +31,15 @@ app.use(DumplingPlus, { downloadResponseById, uploadFile });
 
 ## development
 
-clone this project and `npm run serve`,it will start a demo project
+clone this project and `pnpm storybook`,it will start a storybook project
 
 ## build
 
 > initial version only has umd version bundle,others will come soon
 
 ```shell
-# npm run build:esm
-npm run build:rollup-umd
+# pnpm build:esm
+pnpm build:rollup-umd
 npm version patch
 npm publish
 ```
@@ -38,19 +49,18 @@ npm publish
 ```
 ├─ build         // 编辑打包脚本目录，用于存放脚本文件
 │  ├─ rollup.config.js
-├─ docs          // 文档目录，用于生成 vuepress 文档页面
+├─ docs          // 文档目录，用于生成 vuepress 文档页面 (deprecated)
 │  ├─ .vuepress
 │  ├─ guide
 │  ├─ README.md
 ├─ src      // 用于示例展示
-│  ├─ App.vue
-│  ├─ main.ts
-├─ packages      // 新增 packages 目录，用于编写存放组件，如dialog
+│  ├─ stories   // 各个stories
+├─ packages      // packages 目录，用于编写存放组件，如dialog
 │  ├─ index.ts
 ├─ typings      // 新增 typings 目录， 用于存放 .d.ts 文件，把 shims-vue.d.ts 移动到这里
 │  ├─ shims-vue.d.ts
 ├─ .npmignore    // 新增 .npmignore 配置文件
-├─ vue.config.js // 新增 vue.config.js 配置文件
+├─ vite.config.js // 新增 vite.config.js 配置文件
 
 ```
 
