@@ -1,6 +1,6 @@
 import DpDialog from "~/dialog";
 import DpSearchForm from "~/search-form";
-import { ref } from "vue"
+import { ref } from "vue";
 
 export default {
   title: "Example/Dialog 弹窗",
@@ -83,14 +83,14 @@ base.args = {
   isShowConfirm: true,
   confirmLoading: false,
   loading: false,
-}
-base.storyName = '基础' 
+};
+base.storyName = "基础";
 
 export const embedded_other_component: any = () => ({
-  components: { 
+  components: {
     DpDialog,
     DpSearchForm,
-   },
+  },
 
   setup() {
     const dialogVisible = ref(true);
@@ -163,4 +163,4 @@ export const embedded_other_component: any = () => ({
     </dp-dialog>
   `,
 });
-embedded_other_component.storyName = 'slot其他组件'
+embedded_other_component.storyName = "slot其他组件";

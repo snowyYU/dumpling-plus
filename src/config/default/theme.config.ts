@@ -6,45 +6,45 @@
  * @LastEditTime: 2020-12-09 10:16:28
  */
 // 布局枚举
-enum Layout{
-    Horizontal,
-    Vertical,
-    Gallery,
-    Comprehensive,
-    Common
+enum Layout {
+  Horizontal,
+  Vertical,
+  Gallery,
+  Comprehensive,
+  Common,
 }
 // 主题分类
-enum ThemeName{
-    Default,
-    Ocean,
-    Green,
-    Glory,
-    White
+enum ThemeName {
+  Default,
+  Ocean,
+  Green,
+  Glory,
+  White,
 }
 
-export interface Theme{
+export interface Theme {
   // 布局种类 horizontal vertical gallery comprehensive common
-  layout?: Layout
+  layout?: Layout;
   // 主题名称 default ocean green glory white
-  themeName?: ThemeName
+  themeName?: ThemeName;
   // 是否固定头部
-  fixedHeader?: boolean
+  fixedHeader?: boolean;
   // 是否显示顶部进度条
-  showProgressBar?: boolean
+  showProgressBar?: boolean;
   // 是否显示多标签页
-  showTabsBar?: boolean
+  showTabsBar?: boolean;
   // 是否显示语言选择组件
-  showLanguage?: boolean
+  showLanguage?: boolean;
   // 是否显示刷新组件
-  showRefresh?: boolean
+  showRefresh?: boolean;
   // 是否显示搜索组件
-  showSearch?: boolean
+  showSearch?: boolean;
   // 是否显示主题组件
-  showTheme?: boolean
+  showTheme?: boolean;
   // 是否显示通知组件
-  showNotice?: boolean
+  showNotice?: boolean;
   // 是否显示全屏组件
-  showFullScreen?: boolean
+  showFullScreen?: boolean;
 }
 
 const themeConfig: Theme = {
@@ -69,7 +69,7 @@ const themeConfig: Theme = {
   // 是否显示通知组件
   showNotice: true,
   // 是否显示全屏组件
-  showFullScreen: true
-}
+  showFullScreen: true,
+};
 
-export default themeConfig
+export default themeConfig;

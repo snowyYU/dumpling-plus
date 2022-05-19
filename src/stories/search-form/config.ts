@@ -14,13 +14,13 @@ export const argTypes = {
   showBtnArr: {},
   blueBtnText: {},
   initToggleStatus: {},
-}
+};
 
 // 表单项数组
 export interface baseSchemaType {
-  key: string,    // key对应绑定的数据对象
-  type: string,   // 控件类型
-  label: string,  // 
+  key: string; // key对应绑定的数据对象
+  type: string; // 控件类型
+  label: string; //
 }
 export const baseSchema = [
   {
@@ -33,9 +33,7 @@ export const baseSchema = [
     type: "input",
     label: "货位编码",
     formItemProps: {
-      rules: [
-        { required: true, message: "请输入货位编码", trigger: "blur" },
-      ],
+      rules: [{ required: true, message: "请输入货位编码", trigger: "blur" }],
     },
     fieldProps: {
       disabled: false,
@@ -50,10 +48,10 @@ export const baseSchema = [
       inactiveValue: "0",
     },
   },
-]
+];
 // 表单响应数据对象
 export const baseModel = {
   title: "",
   allocationCode: "",
   allocationState: "",
-}
+};

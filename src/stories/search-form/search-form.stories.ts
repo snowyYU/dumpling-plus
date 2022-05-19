@@ -1,11 +1,6 @@
 import SearchForm from "~/search-form";
 import { ref } from "vue";
-import { 
-  argTypes, 
-  baseSchemaType,
-  baseSchema,
-  baseModel,
- } from "./config";
+import { argTypes, baseSchemaType, baseSchema, baseModel } from "./config";
 
 export default {
   title: "Example/SearchForm 条件过滤表单",
@@ -18,8 +13,8 @@ const Template = (args: object) => ({
   // 组件已经被全局引入
   components: { SearchForm },
   setup() {
-    const schema: baseSchemaType[] = baseSchema
-    const model: typeof baseModel = baseModel
+    const schema: baseSchemaType[] = baseSchema;
+    const model: typeof baseModel = baseModel;
     function onSubmit() {
       console.log();
     }
@@ -49,5 +44,5 @@ const Template = (args: object) => ({
 
 export const base: any = Template.bind({});
 // 放在args中的数据可通过控制台面板修改数据
-base.args = {}
-base.storyName = '基础'
+base.args = {};
+base.storyName = "基础";
