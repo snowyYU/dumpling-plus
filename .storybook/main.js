@@ -1,25 +1,22 @@
-const { mergeConfig } = require('vite')
-const { resolve } = require('path')
+const { mergeConfig } = require("vite");
+const { resolve } = require("path");
 
 module.exports = {
   // stories来源
-  "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
+  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   /**
    * 插件
    * https://storybook.js.org/addons
    */
-  "addons": [
+  addons: [
     "@storybook/addon-essentials",
     "@storybook/addon-links",
     // "@storybook/addon-storysource", // 源码插件
   ],
   // 框架
-  "framework": "@storybook/vue3",
-  "core": {
-    "builder": "@storybook/builder-vite"
+  framework: "@storybook/vue3",
+  core: {
+    builder: "@storybook/builder-vite",
   },
 
   /**
@@ -27,12 +24,11 @@ module.exports = {
    * configType as env: 模式，值为"DEVELOPMENT" or "PRODUCTION".
    */
   async viteFinal(config, { configType: env }) {
-
     // 可在cmd打印出信息
     // console.log( 'config', config )
-
+    config.resolve.dedupe = ["@storybook/client-api"];
     return mergeConfig(config, {
-      base: './',
+      base: "./",
       resolve: {
         alias: {
           "@": resolve("src"),
@@ -44,10 +40,10 @@ module.exports = {
         rules: [
           {
             test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'sass-loader'],
-          }
-        ]
+            use: ["style-loader", "css-loader", "sass-loader"],
+          },
+        ],
       },
     });
   },
-}
+};
