@@ -12,10 +12,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    isShowHeader: {
-      type: Boolean,
-      default: true,
-    },
     isShowFooter: {
       type: Boolean,
       default: true,
@@ -151,11 +147,6 @@ export default defineComponent({
 
       return group;
     };
-
-    // const getDialogHeader = () => {
-    //   if (!this.isShowHeader) return "";
-    //   return h("span", { class: "el-dialog__title" }, this.$attrs.title);
-    // };
 
     let dialogSlots: any = {};
 

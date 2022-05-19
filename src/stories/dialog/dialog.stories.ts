@@ -7,9 +7,13 @@ export default {
   component: DpDialog,
   // 参数配置
   argTypes: {
+    title: {
+      type: { name: "string", required: false },
+      description: "头部标题",
+    },
     isShowFooter: {
       type: { name: "boolean", required: false },
-      description: "是否展示底部按钮",
+      description: "是否展示自定义底部按钮，为true时slot#footer将失效或由slot#footerBtns取代",
     },
     isShowCancel: {
       type: { name: "boolean", required: false },
@@ -35,6 +39,24 @@ export default {
       type: { name: "string", required: false },
       description: "确认按钮文案",
     },
+    // emit events
+    confirm: {
+      type: { name: "function", required: false },
+      description: "isShowConfirm为true状态下取消按钮的回调事件",
+    },
+    cancel: {
+      type: { name: "function", required: false },
+      description: "isShowCancel为true状态下取消按钮的回调事件",
+    },
+    // slots
+    footerBtns: {
+      type: { name: "object", required: false },
+      description: "底部按钮 slot，isShowFooter为false时不展示",
+    },
+    key: {
+      type: { name: "object", required: false },
+      description: "底部按钮 slot，isShowFooter为false时不展示",
+    },
   },
 };
 
@@ -42,19 +64,24 @@ const Template = (args: object) => ({
   // 组件已经被全局引入
   components: { DpDialog },
   setup() {
-    const dialogVisible = ref(true);
+    const dialogVisible = ref(false);
 
     function cancel() {
       dialogVisible.value = false;
+    }
+    function confirm(){
+      cancel()
     }
 
     return {
       ...args,
       dialogVisible,
       cancel,
+      confirm,
     };
   },
   template: `
+  <button @click="dialogVisible = true">打开弹窗</button>
   <dp-dialog
     v-model="dialogVisible"
     :title="title"
@@ -67,6 +94,7 @@ const Template = (args: object) => ({
     :cancelText="cancelText"
     :confirmText="confirmText"
     @cancel="cancel"
+    @confirm="confirm"
   >
     <span>This is a message</span>
   </dp-dialog>`,
@@ -79,7 +107,7 @@ base.args = {
   cancelText: "取消按钮",
   confirmText: "确定按钮",
   isShowFooter: true,
-  isShowCancel: false,
+  isShowCancel: true,
   isShowConfirm: true,
   confirmLoading: false,
   loading: false,
@@ -93,7 +121,7 @@ export const embedded_other_component: any = () => ({
   },
 
   setup() {
-    const dialogVisible = ref(true);
+    const dialogVisible = ref(false);
 
     const schema: any[] = [
       {
@@ -146,6 +174,7 @@ export const embedded_other_component: any = () => ({
   },
 
   template: `
+    <button @click="dialogVisible = true">打开弹窗</button>
     <dp-dialog
       v-model="dialogVisible"
       width="80%"
