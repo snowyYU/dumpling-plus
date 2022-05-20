@@ -13,7 +13,8 @@ export default {
     },
     isShowFooter: {
       type: { name: "boolean", required: false },
-      description: "是否展示自定义底部按钮，为true时slot#footer将失效或由slot#footerBtns取代",
+      description:
+        "是否展示自定义底部按钮，为true时slot#footer将失效或由slot#footerBtns取代",
     },
     isShowCancel: {
       type: { name: "boolean", required: false },
@@ -69,8 +70,8 @@ const Template = (args: object) => ({
     function cancel() {
       dialogVisible.value = false;
     }
-    function confirm(){
-      cancel()
+    function confirm() {
+      cancel();
     }
 
     return {
