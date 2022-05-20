@@ -3,18 +3,72 @@ import DpSearchForm from "~/search-form";
 import { ref } from "vue";
 
 export default {
-  title: "Example/Dialog 弹窗",
+  title: "Dialog 弹窗",
   component: DpDialog,
   // 参数配置
   argTypes: {
+    // element props
+    "model-value/v-model": {
+      table: {
+        type: {
+          summary: "boolean",
+        },
+        defaultValue: {
+          summary: false,
+        },
+      },
+      description: "是否显示 Dialog",
+    },
     title: {
-      type: { name: "string", required: false },
+      table: {
+        type: {
+          summary: "string",
+        },
+      },
+      control: {
+        type: "text",
+      },
       description: "头部标题",
     },
+    width: {
+      table: {
+        type: {
+          summary: "string | number",
+        },
+        defaultValue: {
+          summary: "50%",
+        },
+      },
+      control: {
+        type: "text",
+      },
+      description: "Dialog 的宽度	",
+    },
+    fullscreen: {
+      type: { name: "boolean", required: false },
+      description: "是否为全屏 Dialog",
+    },
+    top: {
+      table: {
+        type: {
+          summary: "string",
+          // detail: 'Something really really long',
+        },
+        defaultValue: {
+          summary: "15vh",
+          // detail: 'Something'
+        },
+      },
+      control: {
+        type: "text",
+      },
+      description: "是否为全屏 Dialog",
+    },
+    // props
     isShowFooter: {
       type: { name: "boolean", required: false },
       description:
-        "是否展示自定义底部按钮，为true时slot#footer将失效或由slot#footerBtns取代",
+        "是否展示自定义底部按钮：为true时slot#footer将失效或由slot#footerBtns取代",
     },
     isShowCancel: {
       type: { name: "boolean", required: false },
@@ -59,6 +113,17 @@ export default {
       description: "底部按钮 slot，isShowFooter为false时不展示",
     },
   },
+
+  //
+  parameters: {
+    backgrounds: {},
+    docs: {},
+  },
+
+  //
+  // subcomponents: {
+  //   DpSearchForm,
+  // },
 };
 
 const Template = (args: object) => ({
@@ -73,13 +138,6 @@ const Template = (args: object) => ({
     function confirm() {
       cancel();
     }
-
-    return {
-      ...args,
-      dialogVisible,
-      cancel,
-      confirm,
-    };
   },
   template: `
   <button @click="dialogVisible = true">打开弹窗</button>
@@ -87,6 +145,8 @@ const Template = (args: object) => ({
     v-model="dialogVisible"
     :title="title"
     width="80%"
+    :fullscreen="fullscreen"
+    :top="top"
     :isShowFooter="isShowFooter"
     :isShowCancel="isShowCancel"
     :isShowConfirm="isShowConfirm"
@@ -112,10 +172,49 @@ base.args = {
   isShowConfirm: true,
   confirmLoading: false,
   loading: false,
+  fullscreen: false,
+  // top: '200px',
 };
 base.storyName = "基础";
 
-export const embedded_other_component: any = () => ({
+// ==
+export const hasFooterBtns: any = (args: object) => ({
+  components: {
+    DpDialog,
+  },
+
+  setup() {
+    const dialogVisible = ref(false);
+    return {
+      ...args,
+      dialogVisible,
+    };
+  },
+
+  template: `
+    <button @click="dialogVisible = true">打开弹窗</button>
+    <dp-dialog
+      v-model="dialogVisible"
+      :isShowFooter="isShowFooter"
+      width="80%"
+      title="内嵌【SearchForm】组件"
+      >
+      <template #default>
+        <div>默认slot</div>
+      </template>
+      <template #footerBtns>
+        <p>底部footerBtns slot</p>
+      </template>
+    </dp-dialog>
+  `,
+});
+hasFooterBtns.args = {
+  isShowFooter: false,
+};
+hasFooterBtns.storyName = "slot#footerBtns";
+
+// ==
+export const embedded_other_component: any = (args: object) => ({
   components: {
     DpDialog,
     DpSearchForm,
@@ -166,6 +265,7 @@ export const embedded_other_component: any = () => ({
     }
 
     return {
+      ...args,
       dialogVisible,
       schema,
       model,
@@ -181,7 +281,6 @@ export const embedded_other_component: any = () => ({
       width="80%"
       title="内嵌【SearchForm】组件"
       >
-      <p>hello</p>
       <dp-search-form
         ref="searchForm"
         :model="model"
@@ -193,4 +292,5 @@ export const embedded_other_component: any = () => ({
     </dp-dialog>
   `,
 });
-embedded_other_component.storyName = "slot其他组件";
+embedded_other_component.args = {};
+embedded_other_component.storyName = "默认slot为其他组件";
