@@ -8,14 +8,14 @@
  *
  * Copyright (c) 2022 by 公卫区位大数据前端组, All Rights Reserved.
  */
-import Table from "./index";
+import DpTable from "~/table";
 import { Meta, Story } from "@storybook/vue3";
 
 import { baseColumn } from "./example/baseConfig";
 
 export default {
   title: "Table 基础列表",
-  component: Table,
+  component: DpTable,
   args: { columns: baseColumn },
   argTypes: {
     columns: {
@@ -33,7 +33,7 @@ export default {
 
 //👇 We create a “template” of how args map to rendering
 const Template: Story = (args: any) => ({
-  components: { Table },
+  components: { DpTable },
   setup() {
     return { args };
   },
