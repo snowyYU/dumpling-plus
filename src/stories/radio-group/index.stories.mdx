@@ -1,0 +1,79 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import DpRadioGroup from "~/radio-group";
+import { ref } from "vue";
+import { props, options } from './example/config.ts'
+import argTypes from './argTypes.ts'
+
+<Meta title="radio-group 单选框组" component={DpRadioGroup} argTypes={argTypes}/>
+
+# radio-group 单选框组
+可通过props对象自定义option列表对应的label和value的key值
+
+export const Template = (args) => ({
+  components: { 
+    DpRadioGroup
+  },
+  setup() {
+    const checkList = ref([])
+    return {
+      checkList,
+      ...args
+    }
+  },
+  template: `
+    <dp-radio-group 
+      v-model="checkList" 
+      :props="props" 
+      :options="options" 
+      :radioButton="radioButton"
+      :border="border"
+      :size="size">
+    </dp-radio-group>
+  `,
+})
+
+
+<Canvas>
+  <Story
+    name="Base"
+    args={{
+      props: props,
+      options: options,
+      radioButton: false
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+  <Story
+    name="size: small"
+    args={{
+      props: props,
+      options: options,
+      size: 'small'
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+  <Story
+    name="radioButton: true"
+    args={{
+      props: props,
+      options: options,
+      radioButton: true,
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+  <Story
+    name="border: true"
+    args={{
+      props: props,
+      options: options,
+      border: true,
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Base" />

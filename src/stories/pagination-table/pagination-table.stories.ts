@@ -34,17 +34,15 @@ export default {
   ],
 };
 
-//👇 We create a “template” of how args map to rendering
 const Template: Story = (args: any) => ({
   components: { PaginationTable },
   setup() {
     return { args };
   },
-
   template: '<PaginationTable v-bind="args" />',
 });
-//👇 Each story then reuses that template
-export const Base = Template.bind({});
-// Base.args = { columns: "#ff0", label: "Button" };
 
-Base.storyName = "基础分页列表";
+// 
+export const Base = Template.bind({});
+Base.args = {};
+Base.storyName = "基础";

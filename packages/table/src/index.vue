@@ -199,6 +199,7 @@ export default defineComponent({
     };
 
     const getElementColumns = () => {
+      debugger
       const finallyElementColumns = [];
 
       if (props.isMultiSelect) {

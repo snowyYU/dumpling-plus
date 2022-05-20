@@ -1,0 +1,61 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import DpSelect from "~/select";
+import { ref } from "vue";
+import { props, options } from './example/config.ts'
+import argTypes from './argTypes.ts'
+
+<Meta title="select 选择下拉框" component={DpSelect} argTypes={argTypes}/>
+
+# select 多选框
+可通过props对象自定义option列表对应的label和value的key值
+
+export const Template = (args) => ({
+  components: { 
+    DpSelect
+  },
+  setup() {
+    const checkList = ref([])
+    return {
+      checkList,
+      args
+    }
+  },
+  template: `
+    <dp-select v-model="checkList" v-bind="args" ></dp-select>
+  `,
+})
+
+<Canvas>
+  <Story
+    name="size: large"
+    args={{
+      props: props,
+      options: options,
+      size: 'large',
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+  <Story
+    name="size: default"
+    args={{
+      props: props,
+      options: options,
+      size: 'default',
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+  <Story
+    name="size: small"
+    args={{
+      props: props,
+      options: options,
+      size: 'small',
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="size: large" />
