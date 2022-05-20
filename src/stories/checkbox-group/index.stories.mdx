@@ -1,0 +1,42 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import DpCheckboxGroup from "~/checkbox-group";
+import { ref } from "vue";
+import { props, options } from './example/config.ts'
+
+<Meta title="checkbox-group 多选框"
+ component={DpCheckboxGroup} />
+
+# checkbox-group 多选框
+可通过 props 自定义 option 对应的 label 和 value
+
+export const Template = (args) => ({
+  components: { 
+    DpCheckboxGroup
+  },
+  setup() {
+    const checkList = ref([])
+    return {
+      checkList,
+      ...args
+    }
+  },
+  template: `
+    <dp-checkbox-group v-model="checkList" :props="props" :options="options">
+    </dp-checkbox-group>
+  `,
+})
+
+
+<Canvas>
+  <Story
+    name="Base"
+    args={{
+      props: props,
+      options: options,
+    }}
+  >
+  {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable of={DpCheckboxGroup} />
