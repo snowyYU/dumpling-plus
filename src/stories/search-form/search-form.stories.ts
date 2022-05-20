@@ -1,6 +1,6 @@
 import SearchForm from "~/search-form";
 import { ref } from "vue";
-import { argTypes, baseSchemaType, baseSchema, baseModel } from "./config";
+import { argTypes, baseSchemaType, baseSchema, baseModel } from "./stories.config";
 
 export default {
   title: "SearchForm 条件过滤表单",

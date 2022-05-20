@@ -11,24 +11,14 @@
 import DpSchemaForm from "~/schema-form";
 import { Meta, Story } from "@storybook/vue3";
 
+import { argTypes } from './stories.config';
 import { formSchema, formData } from "./example/baseConfig";
 
 export default {
   title: "DpSchemaForm 配置表单",
   component: DpSchemaForm,
   args: { "v-model:model": formData, schema: formSchema },
-  argTypes: {
-    "v-model:model": {
-      type: { name: "object", required: true },
-      description: "数据对象",
-      table: {
-        type: {
-          summary: "object",
-          detail: "something really really long",
-        },
-      },
-    },
-  },
+  argTypes: argTypes,
   decorators: [
     () => ({ template: '<div style="height:100%;"><story/></div>' }),
   ],

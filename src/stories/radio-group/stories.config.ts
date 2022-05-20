@@ -1,4 +1,4 @@
-export default {
+export const argTypes = {
   // props
   "model-value / v-model": {
     table: {

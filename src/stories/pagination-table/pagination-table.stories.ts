@@ -11,24 +11,14 @@
 import PaginationTable from "~/pagination-table";
 import { Meta, Story } from "@storybook/vue3";
 
+import { argTypes } from './stories.config';
 import { baseColumn } from "./example/baseConfig";
 
 export default {
   title: "PaginationTable 分页列表",
   component: PaginationTable,
   args: { columns: baseColumn },
-  argTypes: {
-    columns: {
-      type: { name: "array", required: true },
-      description: "列配置",
-      table: {
-        type: {
-          summary: "array",
-          detail: "something really really long",
-        },
-      },
-    },
-  },
+  argTypes: argTypes,
   decorators: [
     () => ({ template: '<div style="height:100%;"><story/></div>' }),
   ],

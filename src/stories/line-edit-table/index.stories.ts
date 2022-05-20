@@ -1,10 +1,11 @@
 import DpLineEditTable from "~/line-edit-table";
 import { ref } from "vue";
+import { argTypes } from "./stories.config";
 
 export default {
-  title: "line-edit-table",
+  title: "line-edit-table 编辑表格",
   component: DpLineEditTable,
-  argTypes: {},
+  argTypes: argTypes,
 };
 
 const Template = (args: object) => ({

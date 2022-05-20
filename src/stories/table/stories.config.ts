@@ -1,4 +1,4 @@
-export default {
+export const argTypes = {
   // props
 
   columns: {
@@ -161,13 +161,13 @@ export default {
       category: 'events'
     },
     description: "",
-  }, 
+  },
   "edit-click": {
     table: {
       category: 'events'
     },
     description: "",
-  }, 
+  },
   "delete-click": {
     table: {
       category: 'events'

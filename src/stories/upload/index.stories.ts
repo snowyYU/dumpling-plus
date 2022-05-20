@@ -1,10 +1,11 @@
 import DpUpload from "~/upload";
 import { ref } from "vue";
+import { argTypes } from './stories.config'
 
 export default {
   title: "upload 上传",
   component: DpUpload,
-  argTypes: {},
+  argTypes: argTypes,
 };
 
 const Template = (args: object) => ({

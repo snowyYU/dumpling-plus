@@ -12,7 +12,7 @@ import DpTable from "~/table";
 import { Meta, Story } from "@storybook/vue3";
 
 import { baseColumn } from "./example/baseConfig";
-import argTypes from './argTypes'
+import { argTypes } from './stories.config'
 
 export default {
   title: "Table 表格",
