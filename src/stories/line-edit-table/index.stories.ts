@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { argTypes } from "./stories.config";
 
 export default {
-  title: "line-edit-table 编辑表格",
+  title: "DpLineEditTable 编辑表格",
   component: DpLineEditTable,
   argTypes: argTypes,
 };

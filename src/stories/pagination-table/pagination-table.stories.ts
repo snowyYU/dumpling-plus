@@ -15,7 +15,7 @@ import { argTypes } from './stories.config';
 import { baseColumn } from "./example/baseConfig";
 
 export default {
-  title: "PaginationTable 分页列表",
+  title: "DpPaginationTable 分页列表",
   component: PaginationTable,
   args: { columns: baseColumn },
   argTypes: argTypes,

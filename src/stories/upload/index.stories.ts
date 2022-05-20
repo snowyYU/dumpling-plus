@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { argTypes } from './stories.config'
 
 export default {
-  title: "upload 上传",
+  title: "DpUpload 上传",
   component: DpUpload,
   argTypes: argTypes,
 };

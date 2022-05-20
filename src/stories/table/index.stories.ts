@@ -15,7 +15,7 @@ import { baseColumn } from "./example/baseConfig";
 import { argTypes } from './stories.config'
 
 export default {
-  title: "Table 表格",
+  title: "DpTable 表格",
   component: DpTable,
   args: { columns: baseColumn },
   argTypes: argTypes

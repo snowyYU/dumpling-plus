@@ -4,7 +4,7 @@ import { argTypes } from "./stories.config";
 
 
 export default {
-  title: "pagination 分页",
+  title: "DpPagination 分页",
   component: DpPagination,
   argTypes: argTypes,
 }

@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { argTypes, parameters } from './stories.config'
 
 export default {
-  title: "Dialog 弹窗",
+  title: "DpDialog 弹窗",
   component: DpDialog,
   // 参数配置
   argTypes: argTypes,
