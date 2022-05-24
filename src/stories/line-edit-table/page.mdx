@@ -1,0 +1,70 @@
+
+import { Canvas, Story, ArgsTable, PRIMARY_STORY } from "@storybook/addon-docs"
+
+# DpLineEditTable 编辑表格
+---
+DpLineEditTable是一个由编辑控件组成的表格的组件，主要通过props传入控件的配置参数和emits回调事件接受数据的更新。
+
+### props:column 说明
+column是表格主要配置参数，array数据类型，定义了表格的头部label及对应的行数据绑定的唯一值prop，并且决定了控件的类型以及对应的配置参数
+
+* prop { string } key，唯一绑定值，
+* type { string } 表格项类型：
+    * text: 文字类型，如有slot[prop]则用，如无则用data数据中行数据row[prop]
+    * input: 输入框控件
+    * input-number: 数字类型输入框控件
+    * select: 数据下拉框
+    * time-picker: 时间选择器
+    * time-select: 时间选择
+    * date-picker: 日期选择器
+    * switch: 开关
+* rules { array } 校验规则
+* customRulesName { string } 自定义规则名称：可自主传入某个规则名称，并添加key为规则名称的校验事件
+* fieldProps { object } 透传input组件props参数
+* customDisabledName { string } type为input或switch时，可自定义禁用标记，默认为`${prop}_disabled`，当data数据中行数据row[customDisabledName]不为undefined标记为true
+* customOptionsName { string } 自定义type:select下拉框options名称，默认为`${prop}_options`，并从data数据中行数据row[customOptionsName]获取配置数据
+* dpColumn { object } 多级表头
+
+### props:data 说明
+data是表格数据集合，array数据类型，决定了表格主体行数，通过key值对应column中的prop，实现控件与值得绑定。需要通过field-change事件实现data数据更新
+
+### 基础控件类型
+<Canvas>
+  <Story id="dplineedittable-编辑表格--base" />
+</Canvas>
+
+### 操作项slot
+通过插槽#operation，配合props:operationProps可以自定义操作项列
+<Canvas>
+  <Story id="dplineedittable-编辑表格--operation" />
+</Canvas>
+
+
+### 表单验证
+定义组件ref，通过ref拿到组件定义的表单验证相关事件
+* validate(cb): 对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个
+* validateField(props,cb): 传入待验证的表单项的 prop 属性或者 prop 组成的数组，对部分表单字段进行校验的方法，
+* clearValidate(props): 移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果
+
+<Canvas>
+  <Story id="dplineedittable-编辑表格--validate" />
+</Canvas>
+
+
+### 下拉框option设置
+type:select控件option的配置可3种：
+* 在fieldProps透传字段中添加options: [{label: '',value:''}]
+* data行数据中添加columns中的${prop}_options字段，如columns.prop是select，则对应的字段为select_options
+* 在columns中定义customOptionsName字段，并在data行数据中添加以customOptionsName值为key的options
+
+<Canvas>
+  <Story id="dplineedittable-编辑表格--select-options" />
+</Canvas>
+
+### 校验规则rules设置
+<Canvas>
+  <Story id="dplineedittable-编辑表格--rules" />
+</Canvas>
+
+
+<ArgsTable story={PRIMARY_STORY}/>

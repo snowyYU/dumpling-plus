@@ -255,14 +255,6 @@ export default defineComponent({
                     column,
                     index: $index,
                   };
-                  // if (
-                  //   dataSource &&
-                  //   Array.isArray(dataSource) &&
-                  //   dataSource.length > 0 &&
-                  //   dataSource[$index]
-                  // ) {
-                  //   slotProps.row = dataSource[$index];
-                  // }
                   if (hasParentTable.value && slots?.header) {
                     return (slots?.header as Slot)(slotProps);
                   } else {
@@ -314,9 +306,7 @@ export default defineComponent({
                           resolveComponent("el-tooltip"),
                           {
                             effect: "dark",
-                            content:
-                              row[item.tooltipProp as string] ||
-                              row[item.prop as string],
+                            content: row[item.tooltipProp as string] || row[item.prop as string],
                           },
                           {
                             default: () =>
@@ -360,18 +350,6 @@ export default defineComponent({
             }
           };
 
-          // const renderElTableColumn = (item: Column | Column[]): any => {
-          //   if (!Array.isArray(item) && item.prop) {
-          //     return finallyColumn(item);
-          //   } else if (Array.isArray(item)){
-
-          //     return h(
-          //       resolveComponent("el-table-column"),
-          //       { label: item.label },
-          //       renderElTableColumn(item.dpColumn)
-          //     );
-          //   }
-          // };
           finallyElementColumns.push(renderElTableColumn(item));
         });
 
@@ -394,7 +372,7 @@ export default defineComponent({
                 } else {
                   return props.operationBtns.map((btn: any) => {
                     const buttonProps = {
-                      type: "text",
+                      text: true,
                       onClick: handleOperation(defaultProps, btn),
                     };
 

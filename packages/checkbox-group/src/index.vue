@@ -2,7 +2,7 @@
 import { defineComponent, resolveComponent, PropType, h } from "vue";
 // import { ElCheckboxGroup } from "element-plus";
 
-const emits = ["blur", "focus", "change", "input", "clear", "select"];
+const emits = ["change"];
 
 export default defineComponent({
   name: "DpCheckboxGroup",

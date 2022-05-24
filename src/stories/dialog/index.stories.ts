@@ -8,8 +8,7 @@ export default {
   component: DpDialog,
   // 参数配置
   argTypes: argTypes,
-  // 
-  parameters: parameters,
+
 };
 
 const Template = (args: object) => ({

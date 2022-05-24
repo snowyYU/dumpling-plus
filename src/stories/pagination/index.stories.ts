@@ -1,3 +1,5 @@
+
+import { Meta, Story } from "@storybook/vue3";
 import DpPagination from "~/pagination";
 import { ref } from "vue";
 import { argTypes } from "./stories.config";
@@ -46,18 +48,33 @@ const Template = (args: object) => ({
       @size-change="onSizeChange"
       @current-change="onCurrentChange"
       @prev-click="onPrevClick"
-      @next-click	="onNextClick"
+      @next-click="onNextClick"
       @update:current-page="onCurrentChange"
       @update:page-size="onSizeChange"
-    ></DpPagination>
+    >
+    </DpPagination>
   `,
 })
 
 // 
-export const base: any = Template.bind({});
+export const base: Story = Template.bind({});
 base.args = {
   showPageMsg: true,
   showJumper: true,
   total: 76,
 }
 base.storyName = "基础";
+
+
+// 插槽
+export const left: Story = (args: object) => ({
+  components: { DpPagination },
+  setup() {},
+  template: `
+    <DpPagination>
+      <template #left>【温馨提示】：这里可以添加slot</template>
+    </DpPagination>
+  `
+})
+left.args = {}
+left.storyName = "插槽";

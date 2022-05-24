@@ -52,4 +52,8 @@ export const argTypes = {
     },
     description: '用户点击下一页按钮改变当前页时触发	',
   },
+  // slots
+  left: {
+    description: '左边的slot模板',
+  },
 }

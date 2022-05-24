@@ -653,7 +653,8 @@ export default defineComponent({
                 return h(
                   resolveComponent("el-button"),
                   {
-                    type: "text",
+                    // type: "text",
+                    text: true,
                     style: { color: "#FF4D4D" },
                     onClick: () => this.$emit("delete-click", scope),
                   },

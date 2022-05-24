@@ -40,6 +40,7 @@ export default defineComponent({
     },
   },
   computed: {
+    // 默认props和组件props合并
     mergeFormProps() {
       return {
         ...defaultFormProps,
@@ -79,19 +80,16 @@ export default defineComponent({
           ].includes(schemaItem.type)
         ) {
           if (!(schemaItem.fieldProps as any).placeholder) {
-            (schemaItem.fieldProps as any).placeholder =
-              this.getPlaceholder(schemaItem);
+            (schemaItem.fieldProps as any).placeholder = this.getPlaceholder(schemaItem);
           }
         }
 
         if (schemaItem.type === "date-picker") {
           const type = (schemaItem.fieldProps as any).type || "date";
           if (
-            !(schemaItem.fieldProps as any).placeholder &&
-            type.indexOf("range") === -1
+            !(schemaItem.fieldProps as any).placeholder && type.indexOf("range") === -1
           ) {
-            (schemaItem.fieldProps as any).placeholder =
-              this.getPlaceholder(schemaItem);
+            (schemaItem.fieldProps as any).placeholder = this.getPlaceholder(schemaItem);
           }
 
           ["format", "valueFormat"].forEach((key) => {
@@ -170,10 +168,6 @@ export default defineComponent({
      */
     resetFields() {
       (this.$refs.formRef as InstanceType<typeof ElForm>)?.resetFields();
-      // const fields = {
-      //   ...this.model,
-      // };
-      // this.$emit("update:model", fields);
     },
 
     /**
@@ -200,7 +194,6 @@ export default defineComponent({
      * @param {unknown} value
      */
     handleUpdateModelValue(key: string, value: unknown) {
-      // console.log(key, value);
       const fields = {
         ...this.model,
         [key]: value,
@@ -288,10 +281,8 @@ export default defineComponent({
         return h(resolveComponent("el-input"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
-          onInput: (value: string | number) =>
-            this.handleInput(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          onInput: (value: string | number) => this.handleInput(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "autocomplete") {
@@ -299,12 +290,9 @@ export default defineComponent({
         return h(resolveComponent("el-autocomplete"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
-          onChange: (value: string | number) =>
-            this.handleChange(item.key, value),
-          onSelect: (value: string | number) =>
-            this.handleSelect(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          onChange: (value: string | number) => this.handleChange(item.key, value),
+          onSelect: (value: string | number) => this.handleSelect(item.key, value),
         });
       } else if (item.type === "input-number") {
         // 数字输入框
@@ -314,10 +302,8 @@ export default defineComponent({
           min: 0,
           controlsPosition: "right",
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
-          onChange: (value: string | number) =>
-            this.handleChange(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          onChange: (value: string | number) => this.handleChange(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "textarea") {
@@ -326,10 +312,8 @@ export default defineComponent({
           type: "textarea",
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
-          onInput: (value: string | number) =>
-            this.handleInput(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          onInput: (value: string | number) => this.handleInput(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "select") {
@@ -338,11 +322,9 @@ export default defineComponent({
           style: { width: "100%" },
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
-          onVisibleChange: (value: boolean) =>
-            this.handleVisibleChange(item.key, value),
+          onVisibleChange: (value: boolean) => this.handleVisibleChange(item.key, value),
         });
       } else if (item.type === "cascader") {
         // 级联选择器
@@ -351,19 +333,16 @@ export default defineComponent({
           style: { width: "100%" },
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
-          onVisibleChange: (value: boolean) =>
-            this.handleVisibleChange(item.key, value),
+          onVisibleChange: (value: boolean) => this.handleVisibleChange(item.key, value),
         });
       } else if (item.type === "radio") {
         // 单选框
         return h(DpRadioGroup, {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "checkbox") {
@@ -371,8 +350,7 @@ export default defineComponent({
         return h(DpCheckboxGroup, {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "switch") {
@@ -380,8 +358,7 @@ export default defineComponent({
         return h(resolveComponent("el-switch"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "time-select") {
@@ -389,8 +366,7 @@ export default defineComponent({
         return h(resolveComponent("el-time-select"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "time-picker") {
@@ -398,8 +374,7 @@ export default defineComponent({
         return h(resolveComponent("el-time-picker"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "date-picker") {
@@ -407,8 +382,7 @@ export default defineComponent({
         return h(resolveComponent("el-date-picker"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) =>
-            this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "upload") {
@@ -417,8 +391,7 @@ export default defineComponent({
           ref: item.ref,
           fileList: this.model[item.key],
           ...item.fieldProps,
-          onUpdateFileList: (fileList: any) =>
-            this.updateFileList(fileList, item.key),
+          onUpdateFileList: (fileList: any) => this.updateFileList(fileList, item.key),
           onUploadFileSucess: (file: any) => this.uploadSuccess(file, item.key),
           onRemoveFile: (fileList: any) => this.removeFile(fileList, item.key),
         });

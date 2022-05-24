@@ -2,18 +2,15 @@
 import {
   defineComponent,
   h,
-  // RawProps,
-  // resolveComponent,
-  // Slot,
   ref,
   computed,
-  // getCurrentInstance,
 } from "vue";
 import type { RawSlots } from "vue";
 import DpTable from "../../table/src/index.vue";
 import DpPagination from "../../pagination/src/index.vue";
 import { camelCaseToKebabCase } from "@/utils/index";
 
+// 属于分页的props
 const paginationPropNames = [
   "small",
   "background",
@@ -51,9 +48,6 @@ function filterValues<T>(
     } else {
       values[formatKey] = a[formatKey];
     }
-    // if (!!c === !!formatB.includes(formatKey)) {
-    //   values[formatKey] = a[formatKey];
-    // }
   });
   return values as T;
 }
@@ -91,15 +85,8 @@ export default defineComponent({
   },
   emits: [...tableEmits, ...paginationEmits],
   setup(props, { attrs, slots, emit, expose }) {
-    // const internalInstance = getCurrentInstance();
     const tableRef = ref<InstanceType<typeof DpTable>>();
     const paginationRef = ref<InstanceType<typeof DpPagination>>();
-
-    // const hasParentTable = computed(() => {
-    //   return (
-    //     internalInstance?.proxy?.$parent?.$options.name === "IntegratedPage"
-    //   );
-    // });
 
     // 表格参数
     const tableProps = computed(() => {

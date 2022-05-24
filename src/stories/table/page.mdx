@@ -1,0 +1,43 @@
+import { Canvas, Story, ArgsTable, PRIMARY_STORY } from "@storybook/addon-docs"
+import component from './index.stories'
+
+# DpTable 表格
+---
+
+### 基础
+
+<Canvas>
+  <Story id="dptable-表格--base"/>
+</Canvas>
+
+### 头部
+表格头的文案配置有3种：
+* 如是使用DpPaginationTable组件 并且 有slots#header，则用此slot
+* 如有slots#${prop}_header，则用此slot
+* 兜底使用配置项label
+
+<Canvas>
+  <Story id="dptable-表格--header"/>
+</Canvas>
+
+### 内容
+表格头的文案配置有3种：
+* 如是使用DpPaginationTable组件 并且 有slots#default，则用此slot
+* 如有slots[${prop}]，
+* 如有设置columns.useTooltip，则展示表格行数据中key为columns.tooltipProp或columns.prop属性值的值
+* 如有设置isEle，则渲染表格行数据key为columns.prop属性值的值
+* 兜底展示行数据key为columns.prop属性值的值
+
+<Canvas>
+  <Story id="dptable-表格--content"/>
+</Canvas>
+
+### 展开行
+当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。
+通过设置 isExpand 和 slot#expand_slot 可以开启展开行功能，slot#expand_slot的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 slot 相同。
+<Canvas>
+  <Story id="dptable-表格--expand"/>
+</Canvas>
+
+### 组件参数 
+<ArgsTable story={PRIMARY_STORY}/>
