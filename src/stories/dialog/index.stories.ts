@@ -8,7 +8,14 @@ export default {
   component: DpDialog,
   // 参数配置
   argTypes: argTypes,
-
+  // 
+  parameters: {
+    docs: {
+      description: {
+        component: '在element-plue的dialog组件基础上进行改造',
+      },
+    },
+  },
 };
 
 const Template = (args: object) => ({
@@ -64,9 +71,10 @@ base.args = {
   confirmLoading: false,
   loading: false,
   fullscreen: false,
-  // top: '200px',
 };
 base.storyName = "基础";
+base.parameters = {
+}
 
 // ==
 export const hasFooterBtns: any = (args: object) => ({
@@ -102,7 +110,14 @@ export const hasFooterBtns: any = (args: object) => ({
 hasFooterBtns.args = {
   isShowFooter: false,
 };
-hasFooterBtns.storyName = "slot#footerBtns";
+hasFooterBtns.storyName = "底部插槽";
+hasFooterBtns.parameters = {
+  docs: {
+    description: {
+      story: '可以自定义底部插槽模板代替组件默认的按钮，slot:footerBtns',
+    },
+  },
+}
 
 // ==
 export const embedded_other_component: any = (args: object) => ({
@@ -185,3 +200,10 @@ export const embedded_other_component: any = (args: object) => ({
 });
 embedded_other_component.args = {};
 embedded_other_component.storyName = "默认slot为其他组件";
+embedded_other_component.parameters = {
+  docs: {
+    description: {
+      story: '',
+    },
+  },
+}

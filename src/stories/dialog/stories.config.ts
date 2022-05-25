@@ -17,9 +17,7 @@ export const argTypes = {
         summary: "string",
       },
     },
-    control: {
-      type: "text",
-    },
+    // control: false,
     description: "头部标题",
   },
   width: {

@@ -10,6 +10,7 @@ export const argTypes = {
       },
       category: 'props'
     },
+
     description: "绑定值",
   },
   props: {

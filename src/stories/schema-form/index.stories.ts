@@ -43,11 +43,15 @@ export const Base: Story = (args: any) => ({
     const onCustomUpdate = (key: string, value: any, scope: any) => {
       formData.value[key] = value
     }
+    const onUpdateModel = (value: any) =>{
+      
+    }
     return {
       args,
       ...args,
       formData,
       onCustomUpdate,
+      onUpdateModel,
     };
   },
   template: `
@@ -55,6 +59,7 @@ export const Base: Story = (args: any) => ({
       :model="formData"
       :schema="schema"
       @custom-update="onCustomUpdate"
+      @update:model="onUpdateModel"
       >
       <template #module-custom-module-custom="scoped">
         hello,我是type:module-custom的表单项，完全由slot:\${item.key}-module-custom模板渲染
