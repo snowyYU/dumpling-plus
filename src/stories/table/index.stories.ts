@@ -98,7 +98,7 @@ export const header: Story = (args: object) => ({
     ]
     const data = [
       {
-        name: '周杰伦',
+        name: '张三',
         sex: '男',
         age: '42',
       },
@@ -155,7 +155,7 @@ export const content: Story = (args: object) => ({
     ]
     const data = [
       {
-        name: '周杰伦',
+        name: '张三',
         sex: '男',
         location: '广东省广州市',
         detailLocation: '广东省广州市海珠区官洲街道生物岛科盛广场',
@@ -222,7 +222,7 @@ expand.args = {
     {
       name: 'zjl',
       sex: '男',
-      detail: '周杰伦（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、音乐人、演员、导演、编剧，毕业于淡江中学。',
+      detail: '张三（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、音乐人、演员、导演、编剧，毕业于淡江中学。',
     },
   ],
 }

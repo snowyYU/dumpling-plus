@@ -96,19 +96,24 @@ export const hasFooterBtns: any = (args: object) => ({
       v-model="dialogVisible"
       :isShowFooter="isShowFooter"
       width="80%"
-      title="内嵌【SearchForm】组件"
+      title="弹窗底部插槽slot:footerBtns"
       >
       <template #default>
-        <div>默认slot</div>
+        <div style="height: 100px">默认slot</div>
       </template>
       <template #footerBtns>
-        <p>底部footerBtns slot</p>
+        <div>
+          <el-button>导入</el-button>
+          <el-button>导出</el-button>
+          <el-button>下载</el-button>
+          <el-button>关闭</el-button>
+        </div>
       </template>
     </dp-dialog>
   `,
 });
 hasFooterBtns.args = {
-  isShowFooter: false,
+  isShowFooter: true,
 };
 hasFooterBtns.storyName = "底部插槽";
 hasFooterBtns.parameters = {
@@ -185,7 +190,7 @@ export const embedded_other_component: any = (args: object) => ({
     <dp-dialog
       v-model="dialogVisible"
       width="80%"
-      title="内嵌【SearchForm】组件"
+      title="弹窗默认插槽slot:default"
       >
       <dp-search-form
         ref="searchForm"
@@ -203,7 +208,7 @@ embedded_other_component.storyName = "默认slot为其他组件";
 embedded_other_component.parameters = {
   docs: {
     description: {
-      story: '',
+      story: '结合其他组件作为默认插槽挂载到弹窗body',
     },
   },
 }

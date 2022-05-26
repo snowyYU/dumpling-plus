@@ -83,7 +83,7 @@ export const operation: any = (args: object) => ({
     ]
     const tableData: any[] = [
       {
-        name: '周杰伦',
+        name: '张三',
       }
     ]
     const operationProps = {
@@ -178,7 +178,7 @@ export const select_options: any = (args: object) => ({
         fieldProps: {
           options: [
             {
-              label: '周杰伦',
+              label: '张三',
               value: 'zjl',
             },
             {
@@ -208,7 +208,7 @@ export const select_options: any = (args: object) => ({
         custom_seelct: 'lxl',
         custom_seelct_options: [
           {
-            label: '周杰伦',
+            label: '张三',
             value: 'zjl',
           },
           {
@@ -220,7 +220,7 @@ export const select_options: any = (args: object) => ({
         'custom_seelct-customOptionsName': 'lxl',
         'my-options': [
           {
-            label: '周杰伦',
+            label: '张三',
             value: 'zjl',
           },
           {

@@ -64,7 +64,7 @@ export const columns = [
     fieldProps: {
       options: [
         {
-          label: '周杰伦',
+          label: '张三',
           value: 'zjl',
         },
         {
