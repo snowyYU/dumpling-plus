@@ -106,16 +106,19 @@ export default defineComponent({
           ].includes(schemaItem.type)
         ) {
           if (!(schemaItem.fieldProps as any).placeholder) {
-            (schemaItem.fieldProps as any).placeholder = this.getPlaceholder(schemaItem);
+            (schemaItem.fieldProps as any).placeholder =
+              this.getPlaceholder(schemaItem);
           }
         }
 
         if (schemaItem.type === "date-picker") {
           const type = (schemaItem.fieldProps as any).type || "date";
           if (
-            !(schemaItem.fieldProps as any).placeholder && type.indexOf("range") === -1
+            !(schemaItem.fieldProps as any).placeholder &&
+            type.indexOf("range") === -1
           ) {
-            (schemaItem.fieldProps as any).placeholder = this.getPlaceholder(schemaItem);
+            (schemaItem.fieldProps as any).placeholder =
+              this.getPlaceholder(schemaItem);
           }
 
           ["format", "valueFormat"].forEach((key) => {
@@ -317,8 +320,10 @@ export default defineComponent({
         return h(resolveComponent("el-input"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
-          onInput: (value: string | number) => this.handleInput(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
+          onInput: (value: string | number) =>
+            this.handleInput(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "autocomplete") {
@@ -326,9 +331,12 @@ export default defineComponent({
         return h(resolveComponent("el-autocomplete"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
-          onChange: (value: string | number) => this.handleChange(item.key, value),
-          onSelect: (value: string | number) => this.handleSelect(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
+          onChange: (value: string | number) =>
+            this.handleChange(item.key, value),
+          onSelect: (value: string | number) =>
+            this.handleSelect(item.key, value),
         });
       } else if (item.type === "input-number") {
         // 数字输入框
@@ -338,8 +346,10 @@ export default defineComponent({
           min: 0,
           controlsPosition: "right",
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
-          onChange: (value: string | number) => this.handleChange(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
+          onChange: (value: string | number) =>
+            this.handleChange(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "textarea") {
@@ -348,8 +358,10 @@ export default defineComponent({
           type: "textarea",
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
-          onInput: (value: string | number) => this.handleInput(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
+          onInput: (value: string | number) =>
+            this.handleInput(item.key, value),
           onBlur: () => this.handleBlur(item.key),
         });
       } else if (item.type === "select") {
@@ -358,9 +370,11 @@ export default defineComponent({
           style: { width: "100%" },
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
-          onVisibleChange: (value: boolean) => this.handleVisibleChange(item.key, value),
+          onVisibleChange: (value: boolean) =>
+            this.handleVisibleChange(item.key, value),
         });
       } else if (item.type === "cascader") {
         // 级联选择器
@@ -369,16 +383,19 @@ export default defineComponent({
           style: { width: "100%" },
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
-          onVisibleChange: (value: boolean) => this.handleVisibleChange(item.key, value),
+          onVisibleChange: (value: boolean) =>
+            this.handleVisibleChange(item.key, value),
         });
       } else if (item.type === "radio") {
         // 单选框
         return h(DpRadioGroup, {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "checkbox") {
@@ -386,7 +403,8 @@ export default defineComponent({
         return h(DpCheckboxGroup, {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "switch") {
@@ -394,7 +412,8 @@ export default defineComponent({
         return h(resolveComponent("el-switch"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "time-select") {
@@ -402,7 +421,8 @@ export default defineComponent({
         return h(resolveComponent("el-time-select"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "time-picker") {
@@ -410,7 +430,8 @@ export default defineComponent({
         return h(resolveComponent("el-time-picker"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "date-picker") {
@@ -418,7 +439,8 @@ export default defineComponent({
         return h(resolveComponent("el-date-picker"), {
           modelValue: this.model[item.key],
           ...item.fieldProps,
-          "onUpdate:modelValue": (value: unknown) => this.handleUpdateModelValue(item.key, value),
+          "onUpdate:modelValue": (value: unknown) =>
+            this.handleUpdateModelValue(item.key, value),
           onChange: (value: unknown) => this.handleChange(item.key, value),
         });
       } else if (item.type === "custom") {
@@ -538,10 +560,11 @@ export default defineComponent({
                               {
                                 type: "primary",
                                 // size: "small",
-                                onClick: () => this.handleFormButtonClick("search"),
+                                onClick: () =>
+                                  this.handleFormButtonClick("search"),
                               },
                               {
-                                default: () => this.blueBtnText
+                                default: () => this.blueBtnText,
                               }
                             )
                           );
@@ -554,7 +577,8 @@ export default defineComponent({
                               {
                                 type: "default",
                                 // size: "small",
-                                onClick: () => this.handleFormButtonClick("reset"),
+                                onClick: () =>
+                                  this.handleFormButtonClick("reset"),
                               },
                               { default: () => "重置" }
                             )
@@ -568,7 +592,8 @@ export default defineComponent({
                               {
                                 type: "default",
                                 // size: "small",
-                                onClick: () => this.handleFormButtonClick("toggle"),
+                                onClick: () =>
+                                  this.handleFormButtonClick("toggle"),
                               },
                               {
                                 default: () => [

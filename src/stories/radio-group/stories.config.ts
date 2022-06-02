@@ -3,9 +3,9 @@ export const argTypes = {
   "model-value / v-model": {
     table: {
       type: {
-        summary: 'string / number / boolean',
+        summary: "string / number / boolean",
       },
-      category: 'props'
+      category: "props",
     },
     description: "绑定值",
   },
@@ -21,21 +21,21 @@ export const argTypes = {
   size: {
     table: {
       type: {
-        summary: 'string',
-        detail: '可选值:large/default/small',
+        summary: "string",
+        detail: "可选值:large/default/small",
       },
       defaultValue: {
-        summary: 'default',
+        summary: "default",
       },
-      category: 'props'
+      category: "props",
     },
     description: "输入框尺寸",
   },
   // emits
-  "change": {
+  change: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "绑定值变化时触发的事件",
   },
-}
+};

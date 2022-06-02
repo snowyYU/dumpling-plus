@@ -1,11 +1,6 @@
 <script lang="ts">
-import {
-  defineComponent,
-  h,
-  ref,
-  computed,
-} from "vue";
-import type { RawSlots } from "vue";
+import { defineComponent, h, ref, computed } from "vue";
+import type { Slot } from "vue";
 import DpTable from "../../table/src/index.vue";
 import DpPagination from "../../pagination/src/index.vue";
 import { camelCaseToKebabCase } from "@/utils/index";
@@ -132,7 +127,7 @@ export default defineComponent({
       ];
 
       if (props.showPagination) {
-        const paginationSlots: RawSlots = {};
+        const paginationSlots: { [name: string]: Slot | undefined } = {};
 
         if (slots["pagination-left"]) {
           paginationSlots.left = slots["pagination-left"];

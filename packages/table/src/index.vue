@@ -306,7 +306,9 @@ export default defineComponent({
                           resolveComponent("el-tooltip"),
                           {
                             effect: "dark",
-                            content: row[item.tooltipProp as string] || row[item.prop as string],
+                            content:
+                              row[item.tooltipProp as string] ||
+                              row[item.prop as string],
                           },
                           {
                             default: () =>

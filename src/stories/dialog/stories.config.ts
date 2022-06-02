@@ -102,9 +102,9 @@ export const argTypes = {
     type: { name: "object", required: false },
     description: "底部按钮 slot，isShowFooter为false时不展示",
   },
-}
+};
 
 export const parameters = {
   backgrounds: {},
   docs: {},
-}
+};

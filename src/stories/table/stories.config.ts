@@ -12,7 +12,7 @@ export const argTypes = {
   data: {
     description: "表格数据",
     table: {
-      category: 'props',
+      category: "props",
       type: {
         summary: "array",
       },
@@ -25,7 +25,7 @@ export const argTypes = {
     description: "设置操作列的宽度",
     tabel: {
       type: {
-        summary: 'string | number'
+        summary: "string | number",
       },
     },
   },
@@ -33,7 +33,7 @@ export const argTypes = {
     description: "是否固定在左侧或者右侧。true 表示固定在左侧",
     tabel: {
       type: {
-        summary: 'string / boolean'
+        summary: "string / boolean",
       },
     },
   },
@@ -41,7 +41,7 @@ export const argTypes = {
     description: "操作列按钮",
     tabel: {
       type: {
-        summary: 'object',
+        summary: "object",
       },
     },
   },
@@ -64,139 +64,144 @@ export const argTypes = {
     description: "操作选项列的透传属性",
   },
   deleteConfirm: {
-    description: "删除时是否使用确认框，为false时表示点击不出现提示框，为string[]类型时，第一个string为删除前提示语，第二个string为取消后提示语",
+    description:
+      "删除时是否使用确认框，为false时表示点击不出现提示框，为string[]类型时，第一个string为删除前提示语，第二个string为取消后提示语",
   },
   loading: {
     description: "表格加载状态",
   },
   isExpand: {
-    description: '通过设置 type="expand" 和 slot#expand_slot 可以开启展开行功能',
+    description:
+      '通过设置 type="expand" 和 slot#expand_slot 可以开启展开行功能',
   },
   // emits
-  "select": {
+  select: {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当用户手动勾选数据行的 Checkbox 时触发的事件",
   },
   "select-all": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当用户手动勾选全选 Checkbox 时触发的事件",
   },
   "selection-change": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当选择项发生变化时会触发该事件",
   },
   "cell-mouse-enter": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当单元格 hover 进入时会触发该事件",
   },
   "cell-mouse-leave": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当单元格 hover 退出时会触发该事件",
   },
   "cell-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某个单元格被点击时会触发该事件",
   },
   "cell-dblclick": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某个单元格被双击击时会触发该事件",
   },
   "cell-contextmenu": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某个单元格被鼠标右键点击时会触发该事件",
   },
   "row-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某一行被点击时会触发该事件",
   },
   "row-contextmenu": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某一行被鼠标右键点击时会触发该事件",
   },
   "row-dblclick": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某一行被双击时会触发该事件",
   },
   "header-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某一列的表头被点击时会触发该事件",
   },
   "header-contextmenu": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当某一列的表头被鼠标右键点击时触发该事件",
   },
   "sort-change": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当表格的排序条件发生变化的时候会触发该事件",
   },
   "filter-change": {
     table: {
-      category: 'events'
+      category: "events",
     },
-    description: "column 的 key， 如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件",
+    description:
+      "column 的 key， 如果需要使用 filter-change 事件，则需要此属性标识是哪个 column 的筛选条件",
   },
   "current-change": {
     table: {
-      category: 'events'
+      category: "events",
     },
-    description: "当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性",
+    description:
+      "当表格的当前行发生变化的时候会触发该事件，如果要高亮当前行，请打开表格的 highlight-current-row 属性",
   },
   "header-dragend": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "当拖动表头改变了列的宽度的时候会触发该事件",
   },
   "expand-change": {
     table: {
-      category: 'events'
+      category: "events",
     },
-    description: "当用户对某一行展开或者关闭的时候会触发该事件（展开行时，回调的第二个参数为 expandedRows；树形表格时第二参数为 expanded）",
+    description:
+      "当用户对某一行展开或者关闭的时候会触发该事件（展开行时，回调的第二个参数为 expandedRows；树形表格时第二参数为 expanded）",
   },
   "detail-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "操作项详情按钮点击事件",
   },
   "edit-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "操作项编辑按钮点击事件",
   },
   "delete-click": {
     table: {
-      category: 'events'
+      category: "events",
     },
     description: "操作项删除按钮点击事件",
   },
-}
+};

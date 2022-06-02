@@ -3,12 +3,12 @@ export const argTypes = {
   "model-value / v-model": {
     table: {
       type: {
-        summary: 'array',
+        summary: "array",
       },
       defaultValue: {
-        summary: '[]',
+        summary: "[]",
       },
-      category: 'props'
+      category: "props",
     },
 
     description: "绑定值",
@@ -20,10 +20,10 @@ export const argTypes = {
     description: "多选框配置列表",
   },
   // emits
-  "change": {
+  change: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "当绑定值变化时触发的事件",
   },
-}
+};

@@ -12,9 +12,9 @@ import DpPaginationTable from "~/pagination-table";
 import { Story } from "@storybook/vue3";
 import { ref, computed } from "vue";
 
-import { argTypes } from './stories.config';
+import { argTypes } from "./stories.config";
 import { baseColumn, baseData } from "./example/baseConfig";
-import docsPage from './page.mdx';
+import docsPage from "./page.mdx";
 
 export default {
   title: "DpPaginationTable 分页表格",
@@ -30,24 +30,27 @@ export default {
   },
 };
 
-// 
+//
 export const Base: Story = (args: any) => ({
   components: { DpPaginationTable },
   setup() {
-    const currentPage = ref(1)
-    const pageSize = ref(5)
+    const currentPage = ref(1);
+    const pageSize = ref(5);
 
     function onSizeChange(val: number) {
-      pageSize.value = val
+      pageSize.value = val;
     }
     function onCurrentChange(val: number) {
-      currentPage.value = val
+      currentPage.value = val;
     }
 
-    const tableData = computed(()=>{
-      return args.data.slice( (currentPage.value - 1) * pageSize.value ,currentPage.value * pageSize.value)
-    })
-    return { 
+    const tableData = computed(() => {
+      return args.data.slice(
+        (currentPage.value - 1) * pageSize.value,
+        currentPage.value * pageSize.value
+      );
+    });
+    return {
       ...args,
 
       currentPage,
@@ -73,7 +76,7 @@ export const Base: Story = (args: any) => ({
     @update:page-size="onSizeChange"
   >
   </DpPaginationTable>`,
-})
+});
 Base.args = {
   showPagination: true,
   columns: baseColumn,

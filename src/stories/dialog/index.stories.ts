@@ -1,18 +1,18 @@
 import DpDialog from "~/dialog";
 import DpSearchForm from "~/search-form";
 import { ref } from "vue";
-import { argTypes, parameters } from './stories.config'
+import { argTypes, parameters } from "./stories.config";
 
 export default {
   title: "DpDialog 弹窗",
   component: DpDialog,
   // 参数配置
   argTypes: argTypes,
-  // 
+  //
   parameters: {
     docs: {
       description: {
-        component: '在element-plue的dialog组件基础上进行改造',
+        component: "在element-plue的dialog组件基础上进行改造",
       },
     },
   },
@@ -35,7 +35,7 @@ const Template = (args: object) => ({
       dialogVisible,
       cancel,
       confirm,
-    }
+    };
   },
   template: `
   <button @click="dialogVisible = true">打开弹窗</button>
@@ -59,9 +59,9 @@ const Template = (args: object) => ({
   </dp-dialog>`,
 });
 
-export const base: any = Template.bind({});
+export const Base: any = Template.bind({});
 // 放在args中的数据可通过控制台面板修改数据
-base.args = {
+Base.args = {
   title: "温馨提示",
   cancelText: "取消按钮",
   confirmText: "确定按钮",
@@ -72,12 +72,11 @@ base.args = {
   loading: false,
   fullscreen: false,
 };
-base.storyName = "基础";
-base.parameters = {
-}
+Base.storyName = "基础";
+Base.parameters = {};
 
 // ==
-export const hasFooterBtns: any = (args: object) => ({
+export const HasFooterBtns: any = (args: object) => ({
   components: {
     DpDialog,
   },
@@ -112,20 +111,20 @@ export const hasFooterBtns: any = (args: object) => ({
     </dp-dialog>
   `,
 });
-hasFooterBtns.args = {
+HasFooterBtns.args = {
   isShowFooter: true,
 };
-hasFooterBtns.storyName = "底部插槽";
-hasFooterBtns.parameters = {
+HasFooterBtns.storyName = "底部插槽";
+HasFooterBtns.parameters = {
   docs: {
     description: {
-      story: '可以自定义底部插槽模板代替组件默认的按钮，slot:footerBtns',
+      story: "可以自定义底部插槽模板代替组件默认的按钮，slot:footerBtns",
     },
   },
-}
+};
 
 // ==
-export const embedded_other_component: any = (args: object) => ({
+export const EmbeddedOtherComponent: any = (args: object) => ({
   components: {
     DpDialog,
     DpSearchForm,
@@ -203,12 +202,12 @@ export const embedded_other_component: any = (args: object) => ({
     </dp-dialog>
   `,
 });
-embedded_other_component.args = {};
-embedded_other_component.storyName = "默认slot为其他组件";
-embedded_other_component.parameters = {
+EmbeddedOtherComponent.args = {};
+EmbeddedOtherComponent.storyName = "默认slot为其他组件";
+EmbeddedOtherComponent.parameters = {
   docs: {
     description: {
-      story: '结合其他组件作为默认插槽挂载到弹窗body',
+      story: "结合其他组件作为默认插槽挂载到弹窗body",
     },
   },
-}
+};

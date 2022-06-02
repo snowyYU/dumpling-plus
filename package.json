@@ -24,6 +24,7 @@
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.21",
     "normalize.css": "^8.0.1",
+    "number-precision": "^1.5.2",
     "path-browserify": "^0.0.1",
     "regenerator-runtime": "^0.13.9",
     "register-service-worker": "^1.7.2",

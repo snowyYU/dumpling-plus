@@ -49,10 +49,10 @@ export const argTypes = {
   "visible-change": {
     description: "下拉框出现/隐藏时触发",
   },
-  "search": {
+  search: {
     description: "当点击查询按钮 并 表单验证通过时触发",
   },
-  "reset": {
+  reset: {
     description: "当点击重置按钮时触发",
   },
   "hide-over-flow": {
@@ -61,4 +61,3 @@ export const argTypes = {
 
   // slots
 };
-

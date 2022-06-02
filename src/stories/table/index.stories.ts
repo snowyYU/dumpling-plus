@@ -2,8 +2,8 @@
  * @Author: jasper
  * @Date: 2022-05-16 16:31:04
  * @LastEditors: jasper
- * @LastEditTime: 2022-05-17 15:44:41
- * @FilePath: /dumpling-plus/packages/table/table.stories.ts
+ * @LastEditTime: 2022-06-02 14:55:25
+ * @FilePath: /dumpling-plus/src/stories/table/index.stories.ts
  * @Description:
  *
  * Copyright (c) 2022 by 公卫区位大数据前端组, All Rights Reserved.
@@ -12,8 +12,8 @@ import DpTable from "~/table";
 import { Meta, Story } from "@storybook/vue3";
 
 import { baseColumn } from "./example/baseConfig";
-import { argTypes } from './stories.config'
-import docsPage from './page.mdx'
+import { argTypes } from "./stories.config";
+import docsPage from "./page.mdx";
 
 export default {
   title: "DpTable 表格",
@@ -30,13 +30,15 @@ export default {
 export const Base: Story = (args: any) => ({
   components: { DpTable },
   setup() {
-    return { 
-      ...args
+    return {
+      args,
+      ...args,
     };
   },
 
   template: `
     <DpTable 
+      v-bind="args"
       :columns="columns"
       :data="data"
       :showOperation="showOperation"
@@ -51,59 +53,54 @@ Base.args = {
   columns: baseColumn,
   data: [
     {
-      name: 'zjl',
-      sex: '男',
-      age: '41',
+      name: "zjl",
+      sex: "男",
+      age: "41",
     },
     {
-      name: '张三',
-      sex: '男',
-      age: '36',
+      name: "张三",
+      sex: "男",
+      age: "36",
     },
     {
-      name: 'zjl',
-      sex: '男',
-      age: '41',
+      name: "zjl",
+      sex: "男",
+      age: "41",
     },
   ],
   showOperation: true,
-  operationWidth: '300px',
-  operationFixed: 'right',
-  operationBtns: [
-    'detail',
-    'edit',
-    'delete'
-  ],
+  operationWidth: "300px",
+  operationFixed: "right",
+  operationBtns: ["detail", "edit", "delete"],
 };
 Base.storyName = "基础";
 
-
 // 头部
-export const header: Story = (args: object) => ({
+export const Header: Story = (args: object) => ({
   components: { DpTable },
   setup() {
     const columns = [
       {
-        prop: 'name',
-        label: '姓名',
+        prop: "name",
+        label: "姓名",
       },
       {
-        prop: 'sex',
-        label: '性别',
+        prop: "sex",
+        label: "性别",
       },
       {
-        prop: 'age',
-        label: '年龄',
+        prop: "age",
+        label: "年龄",
       },
-    ]
+    ];
     const data = [
       {
-        name: '张三',
-        sex: '男',
-        age: '42',
+        name: "张三",
+        sex: "男",
+        age: "42",
       },
-    ]
-    return { 
+    ];
+    return {
       ...args,
       columns,
       data,
@@ -119,51 +116,51 @@ export const header: Story = (args: object) => ({
       <template #age_header>年<br/>龄</template>
     </DpTable>
   `,
-})
-header.args = {}
-header.storyName = '表格头文案'
+});
+Header.args = {};
+Header.storyName = "表格头文案";
 
 // 内容
-export const content: Story = (args: object) => ({
+export const Content: Story = (args: object) => ({
   components: { DpTable },
   setup() {
     const columns = [
       {
-        prop: 'name',
-        label: '姓名',
+        prop: "name",
+        label: "姓名",
       },
       {
-        prop: 'sex',
-        label: '性别',
+        prop: "sex",
+        label: "性别",
         useTooltip: true,
       },
       {
-        prop: 'location',
-        label: '位置',
+        prop: "location",
+        label: "位置",
         useTooltip: true,
-        tooltipProp: 'detailLocation',
+        tooltipProp: "detailLocation",
       },
       {
-        prop: 'age',
-        label: '年龄',
+        prop: "age",
+        label: "年龄",
       },
       {
-        prop: 'element',
-        label: '节点',
+        prop: "element",
+        label: "节点",
         // isEle: true,
       },
-    ]
+    ];
     const data = [
       {
-        name: '张三',
-        sex: '男',
-        location: '广东省广州市',
-        detailLocation: '广东省广州市海珠区官洲街道生物岛科盛广场',
+        name: "张三",
+        sex: "男",
+        location: "广东省广州市",
+        detailLocation: "广东省广州市海珠区官洲街道生物岛科盛广场",
         age: `42`,
-        element: '<div>0</div>',
+        element: "<div>0</div>",
       },
-    ]
-    return { 
+    ];
+    return {
       ...args,
       columns,
       data,
@@ -180,18 +177,17 @@ export const content: Story = (args: object) => ({
       </template>
     </DpTable>
   `,
-})
-content.args = {}
-content.storyName = '表格内容文案'
-
+});
+Content.args = {};
+Content.storyName = "表格内容文案";
 
 // 展开行
-export const expand: Story = (args: object) => ({
+export const Expand: Story = (args: object) => ({
   components: { DpTable },
   setup() {
     return {
       ...args,
-    }
+    };
   },
   template: `
     <DpTable 
@@ -204,26 +200,27 @@ export const expand: Story = (args: object) => ({
       </template>
     </DpTable>
   `,
-})
-expand.args = {
+});
+Expand.args = {
   isExpand: true,
   columns: [
     {
-      prop: 'name',
-      label: '姓名',
+      prop: "name",
+      label: "姓名",
     },
     {
-      prop: 'sex',
-      label: '性别',
+      prop: "sex",
+      label: "性别",
       useTooltip: true,
     },
   ],
   data: [
     {
-      name: 'zjl',
-      sex: '男',
-      detail: '张三（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、音乐人、演员、导演、编剧，毕业于淡江中学。',
+      name: "zjl",
+      sex: "男",
+      detail:
+        "张三（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、音乐人、演员、导演、编剧，毕业于淡江中学。",
     },
   ],
-}
-expand.storyName = '展开行'
+};
+Expand.storyName = "展开行";

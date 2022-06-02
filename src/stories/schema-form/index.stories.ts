@@ -8,20 +8,20 @@
  *
  * Copyright (c) 2022 by 公卫区位大数据前端组, All Rights Reserved.
  */
-import { ref } from 'vue';
+import { ref } from "vue";
 import DpSchemaForm from "~/schema-form";
 import { Story } from "@storybook/vue3";
 
-import { argTypes } from './stories.config';
-import { 
-  baseFormData, 
-  baseFormSchema, 
-  validateFormSchema, 
-  validateFormData, 
+import { argTypes } from "./stories.config";
+import {
+  baseFormData,
+  baseFormSchema,
+  validateFormSchema,
+  validateFormData,
   datePickerFormSchema,
   datePickerFormDate,
 } from "./example/baseConfig";
-import docsPage from './page.mdx';
+import docsPage from "./page.mdx";
 
 export default {
   title: "DpSchemaForm 配置表单",
@@ -34,18 +34,17 @@ export default {
   },
 };
 
-
 // 基础
 export const Base: Story = (args: any) => ({
   components: { DpSchemaForm },
   setup() {
-    const formData = ref(args.model)
+    const formData = ref(args.model);
     const onCustomUpdate = (key: string, value: any, scope: any) => {
-      formData.value[key] = value
-    }
-    const onUpdateModel = (value: any) =>{
-      
-    }
+      formData.value[key] = value;
+    };
+    const onUpdateModel = (value: any) => {
+      console.log(value);
+    };
     return {
       args,
       ...args,
@@ -75,39 +74,43 @@ export const Base: Story = (args: any) => ({
       </template>
     </DpSchemaForm>
   `,
-})
+});
 Base.args = {
   model: baseFormData,
-  schema: baseFormSchema
+  schema: baseFormSchema,
 };
 Base.storyName = "基础配置表格";
 
-
 //表单验证
-export const validate: Story = (args: any) => ({
+export const Validate: Story = (args: any) => ({
   components: { DpSchemaForm },
   setup() {
-    const DpSchemaFormRef = ref()
-    const formData = ref(args.model)
+    const DpSchemaFormRef = ref();
+    const formData = ref(args.model);
     const onCustomUpdate = (key: string, value: any, scope: any) => {
-      formData.value[key] = value
-    }
+      formData.value[key] = value;
+    };
     const onValidate = () => {
-      DpSchemaFormRef.value?.validate((isValid: boolean, invalidFields?: ValidateFieldsError) => {
-        console.log(isValid, invalidFields)
-      })
-    }
+      DpSchemaFormRef.value?.validate(
+        (isValid: boolean, invalidFields?: ValidateFieldsError) => {
+          console.log(isValid, invalidFields);
+        }
+      );
+    };
     const onValidateField = () => {
-      DpSchemaFormRef.value?.validateField(['name'], (isValid: boolean, invalidFields?: ValidateFieldsError) => {
-        console.log(isValid, invalidFields)
-      })
-    }
+      DpSchemaFormRef.value?.validateField(
+        ["name"],
+        (isValid: boolean, invalidFields?: ValidateFieldsError) => {
+          console.log(isValid, invalidFields);
+        }
+      );
+    };
     const onClearValidate = () => {
-      DpSchemaFormRef.value?.clearValidate()
-    }
+      DpSchemaFormRef.value?.clearValidate();
+    };
     const onResetFields = () => {
-      DpSchemaFormRef.value?.resetFields()
-    }
+      DpSchemaFormRef.value?.resetFields();
+    };
     return {
       ...args,
       formData,
@@ -117,7 +120,7 @@ export const validate: Story = (args: any) => ({
       onValidateField,
       onClearValidate,
       onResetFields,
-    }
+    };
   },
   template: `
     <DpSchemaForm
@@ -134,28 +137,27 @@ export const validate: Story = (args: any) => ({
     <el-button @click="onClearValidate">表单清空验证</el-button>
     <el-button @click="onResetFields">表单重置</el-button>
   `,
-})
-validate.args = {
+});
+Validate.args = {
   model: validateFormData,
   schema: validateFormSchema,
 };
-validate.storyName = "表单验证";
-
+Validate.storyName = "表单验证";
 
 // 日期选择器
-export const datePicker: Story = (args: any) => ({
+export const DatePicker: Story = (args: any) => ({
   components: { DpSchemaForm },
   setup() {
-    const formData = ref(args.model)
+    const formData = ref(args.model);
     const onCustomUpdate = (key: string, value: any, scope: any) => {
-      console.log( 'update', key, value )
-      formData.value[key] = value
-    }
+      console.log("update", key, value);
+      formData.value[key] = value;
+    };
     return {
       ...args,
       formData,
       onCustomUpdate,
-    }
+    };
   },
   template: `
     <DpSchemaForm 
@@ -164,10 +166,10 @@ export const datePicker: Story = (args: any) => ({
       @custom-update="onCustomUpdate"
       >
     </DpSchemaForm>
-  `
-})
-datePicker.args = {
+  `,
+});
+DatePicker.args = {
   schema: datePickerFormSchema,
-  model:datePickerFormDate,
-}
-datePicker.storyName = "日期选择器"
+  model: datePickerFormDate,
+};
+DatePicker.storyName = "日期选择器";

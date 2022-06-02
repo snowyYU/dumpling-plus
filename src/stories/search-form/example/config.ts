@@ -13,9 +13,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "input",
@@ -24,11 +24,11 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {
-      placeholder: '',
+      placeholder: "",
     },
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "autocomplete",
@@ -37,9 +37,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "input-number",
@@ -48,9 +48,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "textarea",
@@ -59,9 +59,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "select",
@@ -72,18 +72,18 @@ export const baseSchema = [
     fieldProps: {
       options: [
         {
-          label: '选项1',
-          value: '1',
+          label: "选项1",
+          value: "1",
         },
         {
-          label: '选项2',
-          value: '2',
+          label: "选项2",
+          value: "2",
         },
       ],
     },
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "cascader",
@@ -94,38 +94,38 @@ export const baseSchema = [
     fieldProps: {
       options: [
         {
-          value: 'gd',
-          label: '广东',
+          value: "gd",
+          label: "广东",
           children: [
             {
-              value: 'gz',
-              label: '广州',
+              value: "gz",
+              label: "广州",
             },
             {
-              value: 'fs',
-              label: '佛山',
+              value: "fs",
+              label: "佛山",
             },
-          ]
+          ],
         },
         {
-          value: 'hn',
-          label: '湖南',
+          value: "hn",
+          label: "湖南",
           children: [
             {
-              value: 'cs',
-              label: '长沙',
+              value: "cs",
+              label: "长沙",
             },
             {
-              value: 'xt',
-              label: '湘潭',
+              value: "xt",
+              label: "湘潭",
             },
-          ]
+          ],
         },
       ],
     },
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "radio",
@@ -135,23 +135,23 @@ export const baseSchema = [
     formItemProps: {},
     fieldProps: {
       props: {
-        label: 'myLabel',
-        value: 'myValue',
+        label: "myLabel",
+        value: "myValue",
       },
       options: [
         {
-          myLabel: '单选1',
-          myValue: '1'
+          myLabel: "单选1",
+          myValue: "1",
         },
         {
-          myLabel: '单选2',
-          myValue: '2'
+          myLabel: "单选2",
+          myValue: "2",
         },
       ],
     },
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "checkbox",
@@ -161,23 +161,23 @@ export const baseSchema = [
     formItemProps: {},
     fieldProps: {
       props: {
-        label: 'myLabel',
-        value: 'myValue',
+        label: "myLabel",
+        value: "myValue",
       },
       options: [
         {
-          myLabel: '多选1',
-          myValue: '1'
+          myLabel: "多选1",
+          myValue: "1",
         },
         {
-          myLabel: '多选2',
-          myValue: '2'
+          myLabel: "多选2",
+          myValue: "2",
         },
       ],
     },
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "switch",
@@ -186,9 +186,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "time-select",
@@ -197,9 +197,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "time-picker",
@@ -208,9 +208,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "date-picker",
@@ -219,9 +219,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
   {
     key: "custom",
@@ -230,9 +230,9 @@ export const baseSchema = [
     layoutProps: {},
     formItemProps: {},
     fieldProps: {},
-    customLabel: '',
-    customError: '',
-    ref: '',
+    customLabel: "",
+    customError: "",
+    ref: "",
   },
 ];
 // 表单响应数据对象

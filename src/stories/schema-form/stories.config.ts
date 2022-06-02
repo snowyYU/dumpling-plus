@@ -33,14 +33,14 @@
 
 export const argTypes = {
   // props
-  "model": {
+  model: {
     type: { name: "object", required: true },
     description: "数据对象",
     table: {
       type: {
         summary: "object",
       },
-      category: 'props',
+      category: "props",
     },
   },
   formProps: {
@@ -59,16 +59,16 @@ export const argTypes = {
   "update:model": {
     description: "当控件数据更新时触发",
   },
-  "input": {
+  input: {
     description: "当输入框获得焦点时触发",
   },
-  "blur": {
+  blur: {
     description: "当输入框失去焦点时触发",
   },
-  "change": {
+  change: {
     description: "当控件数据发生变化时触发",
   },
-  "select": {
+  select: {
     description: "当type:autocomplete选中数据发生变化时触发",
   },
   "visible-change": {
@@ -86,26 +86,29 @@ export const argTypes = {
 
   validate: {
     table: {
-      category: 'events',
+      category: "events",
     },
-    description: "对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise",
+    description:
+      "对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise",
   },
   validateField: {
     table: {
-      category: 'events',
+      category: "events",
     },
-    description: "传入表单项的 prop 属性或者 prop 组成的数组，对部分表单字段进行校验的方法",
+    description:
+      "传入表单项的 prop 属性或者 prop 组成的数组，对部分表单字段进行校验的方法",
   },
   resetFields: {
     table: {
-      category: 'events',
+      category: "events",
     },
     description: "对整个表单进行重置，将所有字段值重置为初始值并移除校验结果",
   },
   clearValidate: {
     table: {
-      category: 'events',
+      category: "events",
     },
-    description: "移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果",
+    description:
+      "移除表单项的校验结果。传入待移除的表单项的 prop 属性或者 prop 组成的数组，如不传则移除整个表单的校验结果",
   },
-}
+};

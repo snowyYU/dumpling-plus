@@ -7,7 +7,7 @@ export const argTypes = {
         summary: "array",
         detail: "something really really long",
       },
-      category: 'props'
+      category: "props",
     },
     description: "列配置",
   },
@@ -18,7 +18,4 @@ export const argTypes = {
   // events
 
   // slots
-
-
-  
-}
+};

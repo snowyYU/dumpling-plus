@@ -1,12 +1,12 @@
 import DpCheckboxGroup from "~/checkbox-group";
 import { ref } from "vue";
 import { Story } from "@storybook/vue3";
-import { argTypes } from './stories.config'
-import { props, options } from './example/config'
-import docsPage from './page.mdx'
+import { argTypes } from "./stories.config";
+import { props, options } from "./example/config";
+import docsPage from "./page.mdx";
 
 export default {
-  title: 'DpCheckboxGroup 多选框组',
+  title: "DpCheckboxGroup 多选框组",
   component: DpCheckboxGroup,
   argTypes: argTypes,
   parameters: {
@@ -14,13 +14,13 @@ export default {
       page: docsPage,
     },
   },
-}
+};
 
-export const base: Story = (args: any) => ({
+export const Base: Story = (args: any) => ({
   components: { DpCheckboxGroup },
   setup() {
-    const checkList = ref([])
-    return { 
+    const checkList = ref([]);
+    return {
       ...args,
       checkList,
     };
@@ -35,10 +35,10 @@ export const base: Story = (args: any) => ({
   <p style="font-size: 14px">
     checkList：{{ checkList }}
   </p>
-  `
-})
-base.args = {
+  `,
+});
+Base.args = {
   props: props,
   options: options,
-}
-base.storyName = '基础'
+};
+Base.storyName = "基础";

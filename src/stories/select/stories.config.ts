@@ -3,12 +3,12 @@ export const argTypes = {
   "model-value / v-model": {
     table: {
       type: {
-        summary: 'string / number / boolean / object',
+        summary: "string / number / boolean / object",
       },
       defaultValue: {
-        summary: '',
+        summary: "",
       },
-      category: 'props'
+      category: "props",
     },
     description: "绑定值",
   },
@@ -21,57 +21,57 @@ export const argTypes = {
   size: {
     table: {
       type: {
-        summary: 'string',
-        detail: '可选值:large/default/small',
+        summary: "string",
+        detail: "可选值:large/default/small",
       },
       defaultValue: {
-        summary: 'default',
+        summary: "default",
       },
-      category: 'props'
+      category: "props",
     },
     description: "输入框尺寸",
   },
   // emits
-  "change": {
+  change: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "选中值发生变化时触发",
   },
   "visible-change": {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "下拉框出现/隐藏时触发",
   },
   "remove-tag": {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "多选模式下移除tag时触发",
   },
-  "clear": {
+  clear: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "可清空的单选模式下用户点击清空按钮时触发",
   },
-  "blur": {
+  blur: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "当 input 失去焦点时触发",
   },
-  "focus": {
+  focus: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "当 input 获得焦点时触发",
   },
-  "remoteSearch": {
+  remoteSearch: {
     table: {
-      category: 'event'
+      category: "event",
     },
     description: "远程搜索remote-method触发",
   },
-}
+};
