@@ -12,6 +12,7 @@ import { ref } from "vue";
 import DpSchemaForm from "~/schema-form";
 import { Story } from "@storybook/vue3";
 
+import { Warning } from "@element-plus/icons-vue";
 import { argTypes } from "./stories.config";
 import {
   baseFormData,
@@ -36,7 +37,7 @@ export default {
 
 // 基础
 export const Base: Story = (args: any) => ({
-  components: { DpSchemaForm },
+  components: { DpSchemaForm, Warning },
   setup() {
     const formData = ref(args.model);
     const onCustomUpdate = (key: string, value: any, scope: any) => {
@@ -72,6 +73,19 @@ export const Base: Story = (args: any) => ({
       <template #customError-custom-label="scoped">
         customError自定义错误
       </template>
+
+      <template #input-extend="scoped">
+        <el-tooltip
+          class=""
+          content="multiple lines<br />second line"
+          raw-content
+          placement="right"
+          effect="light"
+        >
+          <el-icon style="marginLeft: 20px" :size='18' color="#606266" ><Warning/></el-icon>
+        </el-tooltip>
+      </template>
+      
     </DpSchemaForm>
   `,
 });

@@ -11,4 +11,5 @@ export interface Schema {
   height?: string;
   visible?: boolean;
   ref?: string;
+  extendProps?: { [propName: string]: unknown };
 }
