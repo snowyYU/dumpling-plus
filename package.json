@@ -17,6 +17,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.4",
     "core-js": "^3.21.1",
     "dayjs": "^1.10.7",
     "element-plus": "^2.0.2",

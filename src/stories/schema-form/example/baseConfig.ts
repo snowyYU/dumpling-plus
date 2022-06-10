@@ -1,3 +1,10 @@
+import { defineComponent } from "vue";
+const testSlot = defineComponent({
+  template: `
+    <div>hello</div>
+  `,
+});
+
 export const baseFormSchema = [
   // 隐藏
   {
@@ -67,16 +74,26 @@ export const baseFormSchema = [
     key: "input",
     type: "input",
     label: "input",
-    layoutProps: {},
+    layoutProps: {
+      span: 24,
+    },
     formItemProps: {
       "label-width": "200px",
     },
-    fieldProps: {},
+    fieldProps: {
+      style: {
+        width: "300px",
+      },
+    },
     customLabel: "",
     customError: "",
     formAreaTitleType: "",
     height: "",
     ref: "",
+    extendProps: {
+      show: true,
+      // slot: testSlot,
+    },
   },
   {
     key: "autocomplete",
