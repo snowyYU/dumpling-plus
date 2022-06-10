@@ -234,6 +234,19 @@ export const baseSchema = [
     customError: "",
     ref: "",
   },
+  {
+    key: "datetimerange",
+    type: "date-picker",
+    label: "datetimerange",
+    fieldProps: {
+      type: "datetimerange",
+      "value-format": "yyyy-MM-dd HH:mm:ss",
+      clearable: true,
+    },
+    formItemProps: {
+      style: "width:calc(100% - 16px)",
+    },
+  },
 ];
 // 表单响应数据对象
 export const baseModel = {

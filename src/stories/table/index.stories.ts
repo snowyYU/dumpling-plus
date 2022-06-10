@@ -2,7 +2,7 @@
  * @Author: jasper
  * @Date: 2022-05-16 16:31:04
  * @LastEditors: jasper
- * @LastEditTime: 2022-06-02 14:55:25
+ * @LastEditTime: 2022-06-09 18:26:41
  * @FilePath: /dumpling-plus/src/stories/table/index.stories.ts
  * @Description:
  *
@@ -227,3 +227,44 @@ Expand.args = {
   ],
 };
 Expand.storyName = "展开行";
+
+// 多选
+export const MultiSelect: Story = (args: object) => ({
+  components: { DpTable },
+  setup() {
+    return {
+      ...args,
+    };
+  },
+  template: `
+    <DpTable 
+      is-multi-select
+      :columns="columns"
+      :data="data"
+      >
+      
+    </DpTable>
+  `,
+});
+MultiSelect.args = {
+  columns: [
+    {
+      prop: "name",
+      label: "姓名",
+    },
+    {
+      prop: "sex",
+      label: "性别",
+      useTooltip: true,
+    },
+  ],
+  data: [
+    {
+      name: "zjl",
+      sex: "男",
+      detail:
+        "张三（Jay Chou），1979年1月18日出生于台湾省新北市，祖籍福建省泉州市永春县，中国台湾流行乐男歌手、音乐人、演员、导演、编剧，毕业于淡江中学。",
+    },
+  ],
+};
+MultiSelect.storyName = "多选";
