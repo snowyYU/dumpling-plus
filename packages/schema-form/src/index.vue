@@ -454,10 +454,11 @@ export default defineComponent({
                   default: () => {
                     return [
                       getFormField(item),
-                      item.extendProps?.show && this.$slots[`${item.key}-extend`]
+                      item.extendProps?.show &&
+                      this.$slots[`${item.key}-extend`]
                         ? (this.$slots[`${item.key}-extend`] as Slot)(item)
-                        : h(item.extendProps?.slot as Slot)
-                    ]
+                        : h(item.extendProps?.slot as Slot),
+                    ];
                   },
                 };
 
