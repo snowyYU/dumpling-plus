@@ -440,7 +440,7 @@ export default defineComponent({
 
     .el-table--enable-row-hover .el-table__body tr:hover > td {
       //表格hover样式
-      background: #f4f5f7;
+      background: #f4f5f7 !important;
     }
 
     .el-table__row .cell {
