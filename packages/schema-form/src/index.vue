@@ -458,8 +458,8 @@ export default defineComponent({
                         ? this.$slots[`${item.key}-extend`]
                           ? (this.$slots[`${item.key}-extend`] as Slot)(item)
                           : h(item.extendProps?.slot as Slot)
-                        : null
-                    ]
+                        : null,
+                    ];
                   },
                 };
 
