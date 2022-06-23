@@ -429,7 +429,7 @@ export default defineComponent({
       font-weight: 600;
       font-size: 14px;
       font-family: PingFangSC-Semibold, PingFang SC;
-      background: #f4f5f7;
+      background: #f4f5f7 !important;
     }
 
     .el-table__row td {
