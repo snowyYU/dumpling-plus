@@ -92,7 +92,7 @@ export const baseFormSchema = [
     ref: "",
     extendProps: {
       show: true,
-      // slot: testSlot,
+      slot: testSlot,
     },
   },
   {
