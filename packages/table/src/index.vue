@@ -231,9 +231,7 @@ export default defineComponent({
             {
               type: "expand",
             },
-            {
-              default: slots.expand_slot,
-            }
+            slots.expand_slot
           )
         );
       }

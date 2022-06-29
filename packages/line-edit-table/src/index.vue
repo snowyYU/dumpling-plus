@@ -5,11 +5,13 @@ import {
   resolveDirective,
   withDirectives,
   PropType,
+  Component,
   h,
   Slot,
   Directive,
 } from "vue";
 import { ElForm } from "element-plus";
+import type { FormValidateCallback } from "element-plus";
 // import { Callback } from "element-plus/lib/components/form/src/form.vue";
 import { Column } from "./index.d";
 import { defaultTableProps } from "./config";
@@ -206,10 +208,7 @@ export default defineComponent({
     /**
      * 对部分表单字段进行校验的方法
      */
-    validateField(
-      props: string | Array<string>,
-      cb: (isValid?: string, invalidFields?: any) => void
-    ) {
+    validateField(props: string | Array<string>, cb?: FormValidateCallback) {
       (this.$refs.formRef as InstanceType<typeof ElForm>)?.validateField(
         props,
         cb
@@ -716,7 +715,7 @@ export default defineComponent({
       }
     }
 
-    return h("div", { class: "line-edit-table" }, children);
+    return () => h("div", { class: "line-edit-table" }, children);
   },
 });
 </script>
