@@ -2,7 +2,7 @@
  * @Author: jasper
  * @Date: 2021-12-02 16:49:05
  * @LastEditors: jasper
- * @LastEditTime: 2022-04-11 18:01:43
+ * @LastEditTime: 2022-07-25 16:22:57
  * @FilePath: /dumpling-plus/packages/index.ts
  * @Description:
  *
@@ -17,6 +17,9 @@ import Table from "./table/index";
 import Pagination from "./pagination/index";
 import PaginationTable from "./pagination-table/index";
 import LineEditTable from "./line-edit-table/index";
+import CheckboxGroup from "./checkbox-group/index";
+import RadioGroup from "./radio-group/index";
+import Select from "./select/index";
 
 const components = [
   SchemaForm,
@@ -27,6 +30,9 @@ const components = [
   Pagination,
   PaginationTable,
   LineEditTable,
+  CheckboxGroup,
+  RadioGroup,
+  Select,
 ];
 
 const install = function (
@@ -63,4 +69,7 @@ export default {
   Pagination,
   PaginationTable,
   LineEditTable,
+  CheckboxGroup,
+  RadioGroup,
+  Select,
 };
