@@ -373,6 +373,7 @@ export default defineComponent({
                   return props.operationBtns.map((btn: any) => {
                     const buttonProps = {
                       text: true,
+                      type: "primary",
                       onClick: handleOperation(defaultProps, btn),
                     };
 
