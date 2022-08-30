@@ -715,7 +715,7 @@ export default defineComponent({
       }
     }
 
-    return () => h("div", { class: "line-edit-table" }, children);
+    return h("div", { class: "line-edit-table" }, children);
   },
 });
 </script>
