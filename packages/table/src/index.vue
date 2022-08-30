@@ -428,7 +428,7 @@ export default defineComponent({
       font-weight: 600;
       font-size: 14px;
       font-family: PingFangSC-Semibold, PingFang SC;
-      background: #f4f5f7 !important;
+      background: #f4f5f7;
     }
 
     .el-table__row td {
@@ -439,7 +439,7 @@ export default defineComponent({
 
     .el-table--enable-row-hover .el-table__body tr:hover > td {
       //表格hover样式
-      background: #f4f5f7 !important;
+      background: #f4f5f7;
     }
 
     .el-table__row .cell {
@@ -450,15 +450,15 @@ export default defineComponent({
     }
 
     .el-table__body tr.current-row > td {
-      background: #dee9ff !important;
+      background: #dee9ff;
     }
 
     .el-table-column--selection {
-      text-overflow: unset !important;
+      text-overflow: unset;
     }
 
     .el-button--text {
-      padding: 0 !important;
+      padding: 0;
     }
   }
 }
