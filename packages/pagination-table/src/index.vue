@@ -35,13 +35,13 @@ function filterValues<T>(
   const formatB = b.map(camelCaseToKebabCase);
   const values: Record<string, any> = {};
   Object.keys(a).forEach((key) => {
-    const formatKey = camelCaseToKebabCase(key);
     if (c) {
+      const formatKey = camelCaseToKebabCase(key);
       if (formatB.includes(formatKey)) {
         values[key] = a[key];
       }
     } else {
-      values[formatKey] = a[formatKey];
+      values[key] = a[key];
     }
   });
   return values as T;

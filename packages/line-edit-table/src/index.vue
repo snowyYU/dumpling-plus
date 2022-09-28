@@ -42,7 +42,6 @@ const emits = [
   "header-dragend",
   "expand-change",
 ];
-
 export default defineComponent({
   name: "DpLineEditTable",
   props: {
@@ -340,6 +339,27 @@ export default defineComponent({
             resolveComponent("el-table-column"),
             { ...column, key: column.prop },
             {
+              // 表头
+              header: ({ column: columnData, $index }: any) => {
+                // const dataSource = attrs.data || [];
+                const slotProps: any = {
+                  item: column,
+                  column: columnData,
+                  index: $index,
+                };
+                if (this.$slots?.header) {
+                  return (this.$slots?.header as Slot)(slotProps);
+                } else {
+                  if (this.$slots[`${column.prop}_header`]) {
+                    return (this.$slots[`${column.prop}_header`] as Slot)(
+                      slotProps
+                    );
+                  } else {
+                    return h("span", null, column.label);
+                  }
+                }
+              },
+              // 内容
               default: (scope: any) => {
                 const formItemProps: any = {
                   prop: `formData.${scope.$index}.${column.prop}`,

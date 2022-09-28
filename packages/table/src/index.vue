@@ -406,7 +406,7 @@ export default defineComponent({
         h(
           resolveComponent("el-table"),
           { ...mergeTableProps.value, ...listeners, ref: tableRef },
-          { default: getElementColumns }
+          { default: getElementColumns, ...slots }
         ),
         [[loading, props.loading]]
       );

@@ -2,7 +2,7 @@
  * @Author: jasper
  * @Date: 2022-05-16 16:31:04
  * @LastEditors: jasper
- * @LastEditTime: 2022-06-10 16:59:04
+ * @LastEditTime: 2022-09-23 11:20:46
  * @FilePath: /dumpling-plus/src/stories/pagination-table/index.stories.ts
  * @Description:
  *
@@ -51,21 +51,23 @@ export const Base: Story = (args: any) => ({
       );
     });
     return {
+      args,
       ...args,
-
       currentPage,
       pageSize,
       onSizeChange,
       onCurrentChange,
-
       tableData,
     };
   },
+  // for template test
+  // :isIndex= "true"
+  // :isMultiSelect="true"
   template: `
   <DpPaginationTable 
+    v-bind="args"
     :columns="columns"
     :data="tableData"
-
     :showPagination="showPagination"
     :total="total"
     :currentPage="currentPage"
@@ -74,12 +76,15 @@ export const Base: Story = (args: any) => ({
     @current-change="onCurrentChange"
     @update:current-page="onCurrentChange"
     @update:page-size="onSizeChange"
+
   >
   </DpPaginationTable>`,
 });
 Base.args = {
   showPagination: true,
   columns: baseColumn,
+  isIndex: true,
+  isMultiSelect: true,
   data: baseData,
   // 分页
   total: baseData.length,

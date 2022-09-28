@@ -2,8 +2,8 @@
  * @Author: jasper
  * @Date: 2022-05-16 16:31:04
  * @LastEditors: jasper
- * @LastEditTime: 2022-05-19 19:48:08
- * @FilePath: /dumpling-plus/src/stories/schema-form/schema-form.stories.ts
+ * @LastEditTime: 2022-09-01 11:30:14
+ * @FilePath: /dumpling-plus/src/stories/schema-form/index.stories.ts
  * @Description:
  *
  * Copyright (c) 2022 by 公卫区位大数据前端组, All Rights Reserved.
@@ -92,6 +92,8 @@ export const Base: Story = (args: any) => ({
 Base.args = {
   model: baseFormData,
   schema: baseFormSchema,
+  // "form-props": { "label-positon": "top" },
+  // "label-positon": "top"
 };
 Base.storyName = "基础配置表格";
 
