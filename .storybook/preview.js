@@ -1,11 +1,14 @@
 /**
  * 在这个文件可设置一些公共的东西
  */
-import elementPlus from "element-plus";
+import ElementPlus from "element-plus";
 import { app } from "@storybook/vue3";
 import "element-plus/dist/index.css";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 import "normalize.css";
-app.use(elementPlus);
+app.use(ElementPlus, {
+  locale: zhCn,
+});
 
 //
 // import packages from '~/index'

@@ -2,7 +2,7 @@
  * @Author: jasper
  * @Date: 2022-05-16 16:31:04
  * @LastEditors: jasper
- * @LastEditTime: 2022-09-01 11:30:14
+ * @LastEditTime: 2022-10-09 16:30:40
  * @FilePath: /dumpling-plus/src/stories/schema-form/index.stories.ts
  * @Description:
  *
@@ -11,7 +11,6 @@
 import { ref } from "vue";
 import DpSchemaForm from "~/schema-form";
 import { Story } from "@storybook/vue3";
-
 import { Warning } from "@element-plus/icons-vue";
 import { argTypes } from "./stories.config";
 import {
